@@ -1,0 +1,17 @@
+# user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio cache/options
+.vs/
+
+# NuGet packages
+*.nupkg
+**/packages/*
+*.nuget.props
+*.nuget.targets
+
+PublicStardewMods/WhatAreYouMissing/bin/
+PublicStardewMods/WhatAreYouMissing/obj/
