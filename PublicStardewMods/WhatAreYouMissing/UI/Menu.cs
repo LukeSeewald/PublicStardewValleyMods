@@ -65,7 +65,7 @@ namespace WhatAreYouMissing
 
         private void AddTabs()
         {
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.SpecificSeasonTab)), TabName.SpecificSeasonTab.ToString(), Constants.SEASON_SPECIFIC_DESCRIPTION)
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.SpecificSeasonTab)), TabName.SpecificSeasonTab.ToString(), Utilities.GetTranslation("SEASON_SPECIFIC_DESCRIPTION"))
             {
                 myID = 16430,
                 downNeighborID = 0,
@@ -75,7 +75,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.PARSNIP_SEEDS);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.SpecificCCSeasonTab)), TabName.SpecificCCSeasonTab.ToString(), Constants.SEASON_SPECIFIC_CC_DESCRIPTION)
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.SpecificCCSeasonTab)), TabName.SpecificCCSeasonTab.ToString(), Utilities.GetTranslation("SEASON_SPECIFIC_CC_DESCRIPTION"))
             {
                 myID = 16431,
                 downNeighborID = 1,
@@ -86,7 +86,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.MELON);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CommonCCTab)), TabName.CommonCCTab.ToString(), Constants.COMMON_CC_DESCRIPTION)
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CommonCCTab)), TabName.CommonCCTab.ToString(), Utilities.GetTranslation("COMMON_CC_DESCRIPTION"))
             {
                 myID = 16432,
                 downNeighborID = 2,
@@ -97,7 +97,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.JELLY);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.MerchantTab)), TabName.MerchantTab.ToString(), Constants.MERCHANT_DESCRIPTION)
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.MerchantTab)), TabName.MerchantTab.ToString(), Utilities.GetTranslation("MERCHANT_DESCRIPTION"))
             {
                 myID = 16433,
                 downNeighborID = 3,
@@ -107,7 +107,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.RARE_SEED);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CookedItemsTab)), TabName.CookedItemsTab.ToString(), Constants.COOKED_ITEMS_DESCRIPTION)
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CookedItemsTab)), TabName.CookedItemsTab.ToString(), Utilities.GetTranslation("COOKED_ITEMS_DESCRIPTION"))
             {
                 myID = 16434,
                 leftNeighborID = 16433,

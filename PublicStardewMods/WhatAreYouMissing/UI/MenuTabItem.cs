@@ -59,14 +59,14 @@ namespace WhatAreYouMissing
 
             if(HoverText != "")
             {
-                int InfoX = xPositionOnScreen + Constants.MENU_WIDTH - 56 - SpriteText.getWidthOfString(Constants.TEXT_TO_HOVER_OVER_FOR_INFO);
+                int InfoX = xPositionOnScreen + Constants.MENU_WIDTH - 56 - SpriteText.getWidthOfString(Utilities.GetTranslation("TEXT_TO_HOVER_OVER_FOR_INFO"));
 
                 HoverTextBounds.X = InfoX;
                 HoverTextBounds.Y = TextY;
-                HoverTextBounds.Width = SpriteText.getWidthOfString(Constants.TEXT_TO_HOVER_OVER_FOR_INFO);
-                HoverTextBounds.Height = SpriteText.getHeightOfString(Constants.TEXT_TO_HOVER_OVER_FOR_INFO);
+                HoverTextBounds.Width = SpriteText.getWidthOfString(Utilities.GetTranslation("TEXT_TO_HOVER_OVER_FOR_INFO"));
+                HoverTextBounds.Height = SpriteText.getHeightOfString(Utilities.GetTranslation("TEXT_TO_HOVER_OVER_FOR_INFO"));
 
-                SpriteText.drawString(b, Constants.TEXT_TO_HOVER_OVER_FOR_INFO, InfoX, TextY);
+                SpriteText.drawString(b, Utilities.GetTranslation("TEXT_TO_HOVER_OVER_FOR_INFO"), InfoX, TextY);
             }
         }
 

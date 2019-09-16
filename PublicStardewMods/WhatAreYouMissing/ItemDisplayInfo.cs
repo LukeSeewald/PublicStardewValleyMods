@@ -50,13 +50,13 @@ namespace WhatAreYouMissing
         {
             Constants constants = new Constants();
 
-            if (constants.LEGENDARY_FISH.Contains(ParentSheetIndex))
+            if (constants.LEGNEDARY_FISH_INFO.ContainsKey(ParentSheetIndex))
             {
-                return constants.OBTAIN_LEGENDARY_FISH[ParentSheetIndex];
+                return constants.LEGNEDARY_FISH_INFO[ParentSheetIndex];
             }
             else if (constants.NIGHT_MARKET_FISH.Contains(ParentSheetIndex))
             {
-                return Constants.NIGHT_MARKET;
+                return Utilities.GetTranslation("NIGHT_MARKET");
             }
             else if (IsFromACrabPot())
             {
@@ -94,7 +94,7 @@ namespace WhatAreYouMissing
         {
             Dictionary<int, SObject> recipeIngredients = ModEntry.RecipesIngredients.GetRecipeIngredients(ParentSheetIndex);
 
-            string displayInfo = Constants.INGREDIENTS + ": ";
+            string displayInfo = Utilities.GetTranslation("INGREDIENTS") + ": ";
 
             foreach (KeyValuePair<int, SObject> ingredient in recipeIngredients)
             {
@@ -151,11 +151,11 @@ namespace WhatAreYouMissing
             switch (itemCategory)
             {
                 case Constants.FISH_CATEGORY:
-                    return Constants.ANY_FISH;
+                    return Utilities.GetTranslation("ANY_FISH");
                 case Constants.EGG_CATEGORY:
-                    return Constants.ANY_EGG;
+                    return Utilities.GetTranslation("ANY_EGG");
                 case Constants.MILK_CATEGORY:
-                    return Constants.ANY_MILK;
+                    return Utilities.GetTranslation("ANY_MILK");
                 default:
                     //should never get here
                     return "Oopsies";
@@ -176,7 +176,7 @@ namespace WhatAreYouMissing
                 for (int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
-                    string seasonStr = ((SeasonIndex)season).ToString();
+                    string seasonStr = GetTranslatedSeason((SeasonIndex)season);
                     if (!seasons.Contains(seasonStr) && seasonalFish.Contains(ParentSheetIndex.ToString()))
                     {
                         seasons.Add(seasonStr);
@@ -186,15 +186,32 @@ namespace WhatAreYouMissing
             return seasons;
         }
 
+        private string GetTranslatedSeason(SeasonIndex seasonIndex)
+        {
+            switch (seasonIndex)
+            {
+                case SeasonIndex.Spring:
+                    return Utilities.GetTranslation("SPRING");
+                case SeasonIndex.Summer:
+                    return Utilities.GetTranslation("SUMMER");
+                case SeasonIndex.Fall:
+                    return Utilities.GetTranslation("FALL");
+                case SeasonIndex.Winter:
+                    return Utilities.GetTranslation("WINTER");
+                default:
+                    return "Oopsies";
+            }
+        }
+
         private string GetCrabPotDisplayInfo()
         {
             if(FishData[ParentSheetIndex].Split('/')[4] == "ocean")
             {
-                return Constants.OBTAINED_FROM_CRAB_POT_IN_OCEAN;
+                return Utilities.GetTranslation("OBTAINED_FROM_CRAB_POT_IN_OCEAN");
             }
             else
             {
-                return Constants.OBTAINED_FROM_CRAB_POT_IN_FRESHWATER;
+                return Utilities.GetTranslation("OBTAINED_FROM_CRAB_POT_IN_FRESHWATER");
             }
         }
 
@@ -233,7 +250,7 @@ namespace WhatAreYouMissing
             //of the woodskip
             if(ParentSheetIndex == Constants.WOODSKIP)
             {
-                possibleLocations.Add(Constants.FOREST_FARM_POND_DIAPLAY_NAME);
+                possibleLocations.Add(Utilities.GetTranslation("FOREST_FARM_POND_DIAPLAY_NAME"));
             }
 
             return possibleLocations;
@@ -272,8 +289,17 @@ namespace WhatAreYouMissing
         private string GetWeatherDisplayInfoForFish()
         {
             string weather = FishData[ParentSheetIndex].Split('/')[7];
-
-            return weather == "both" ? Constants.ANY_WEATHER : char.ToUpper(weather[0]) + weather.Substring(1);
+            switch (weather)
+            {
+                case "sunny":
+                    return Utilities.GetTranslation("SUNNY_WEATHER");
+                case "rainy":
+                    return Utilities.GetTranslation("RAINY_WEATHER");
+                case "both":
+                    return Utilities.GetTranslation("ANY_WEATHER");
+                default:
+                    return "Oopsies";
+            }
         }
 
         private string GetAllPeriodsToCatchDisplayInfo()
@@ -300,7 +326,7 @@ namespace WhatAreYouMissing
 
             if (earliestTime == "6:00 am" && latestTime == "2:00 am")
             {
-                return Constants.ANYTIME;
+                return Utilities.GetTranslation("ANYTIME");
             }
             else
             {

@@ -246,20 +246,6 @@ namespace WhatAreYouMissing
         public const int SPRITE_SIZE = 64;
         public const int MENU_WIDTH = 880;
 
-        public const string SEASON_SPECIFIC_HEADER = "Season Items";
-        public const string SEASON_SPECIFIC_CC_HEADER = "Season Community Center Items";
-        public const string COMMON_CC_HEADER = "Common Community Center Items";
-        public const string MERCHANT_HEADER = "Travelling Cart Items";
-        public const string COOKED_ITEMS_HEADER = "Cooked Items";
-
-        public const string SEASON_SPECIFIC_DESCRIPTION = "Missing items specific to this season";
-        public const string SEASON_SPECIFIC_CC_DESCRIPTION = "Missing Community Center items specific to this season";
-        public const string COMMON_CC_DESCRIPTION = "Missing Community Center items common to all seasons";
-        public const string MERCHANT_DESCRIPTION = "Missing uncommon items that are available from the Travelling Cart";
-        public const string COOKED_ITEMS_DESCRIPTION = "Missing cooked items that you know how to make";
-
-        public const string EMPTY_LIST_MESSAGE = "There is nothing you are missing that is available";
-
         public const string GAME_NAME_MINES = "UndergroundMine";
         public const string GAME_NAME_DESERT = "Desert";
         public const string GAME_NAME_CINDERSAP_FOREST = "Forest";
@@ -272,40 +258,13 @@ namespace WhatAreYouMissing
         public const string GAME_NAME_MUTANT_BUG_LAIR = "BugLand";
         public const string GAME_NAME_WITCHS_SWAMP = "WitchSwamp";
 
-        public const string MINES_DISPLAY_NAME = "Mines";
-        public const string DESERT_DISPLAY_NAME = "Desert";
-        public const string CINDERSAP_RIVER_DISPLAY_NAME = "Cindersap River";
-        public const string CINDERSAP_POND_DISPLAY_NAME = "Cindersap Pond";
-        public const string FOREST_FARM_POND_DIAPLAY_NAME = "Forest Farm Pond";
-        public const string TOWN_RIVER_DISPLAY_NAME = "Town River";
-        public const string MOUNTAIN_LAKE_DISPLAY_NAME = "Mountain Lake";
-        public const string BEACH_DISPLAY_NAME = "Beach";
-        public const string SECRET_WOODS_DISPLAY_NAME = "Secret Woods";
-        public const string SEWER_DISPLAY_NAME = "Sewer";
-        public const string MUTANT_BUG_LAIR_DISPLAY_NAME = "Mutant Bug Lair";
-        public const string WITCHS_SWAMP_DISPLAY_NAME = "Witch's Swamp";
-
-        public const string NIGHT_MARKET = "Night Market Sub";
-
-        public const string OBTAINED_FROM_CRAB_POT_IN_OCEAN = "Obtained from a crab pot in the ocean";
-        public const string OBTAINED_FROM_CRAB_POT_IN_FRESHWATER = "Obtained from a crab pot in freshwater";
-
-        public const string TEXT_TO_HOVER_OVER_FOR_INFO = "Info";
-
-        public const string ANY_WEATHER = "Any Weather";
-        public const string ANY_EGG = "Egg (Any)";
-        public const string ANY_MILK = "Milk (Any)";
-        public const string ANY_FISH = "Fish (Any)";
-        public const string ANYTIME = "Anytime";
-        public const string INGREDIENTS = "Ingredients";
-
-        public readonly ReadOnlyDictionary<int, string> OBTAIN_LEGENDARY_FISH = new ReadOnlyDictionary<int, string>(
+        public readonly ReadOnlyDictionary<int, string> LEGNEDARY_FISH_INFO = new ReadOnlyDictionary<int, string>(
                                                 new Dictionary<int, string>()
                                                 {
-                                                    [LEGEND] = "Fish close to the giant log in the Mountain Lake when its raining",
-                                                    [GLACIERFISH] = "At the bottom of the giant log in the Mountain Lake when its raining",
-                                                    [CRIMSONFISH] = "Second Beach Pier",
-                                                    [ANGLER] = "Fish upwards on the small bridge near JoJo Mart"
+                                                    [LEGEND] = Utilities.GetTranslation("LEGEND_INFO"),
+                                                    [GLACIERFISH] = Utilities.GetTranslation("GLACIERFISH_INFO"),
+                                                    [CRIMSONFISH] = Utilities.GetTranslation("CRIMSONFISH_INFO"),
+                                                    [ANGLER] = Utilities.GetTranslation("ANGLER_INFO")
                                                 });
 
         public readonly ReadOnlyCollection<int> LEGENDARY_FISH = new ReadOnlyCollection<int>(

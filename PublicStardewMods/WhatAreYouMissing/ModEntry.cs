@@ -19,6 +19,7 @@ namespace WhatAreYouMissing
         public static MissingItems MissingItems;
         public static RecipeIngredients RecipesIngredients;
         public static Logger Logger;
+        public static ITranslationHelper Translator;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -26,8 +27,8 @@ namespace WhatAreYouMissing
         {
             //ModEntry is called once before SDV loads.In 3.0 its called even earlier than 2.x - things like Game1.objectInformation 
             //aren't ready yet. If you need to run stuff when a save is ready use the save loaded event
-            //helper.Events.GameLoop.DayStarted += this.OnDayStarting;
-            helper.Events.Input.ButtonPressed += this.OnButtonPressed;
+            Translator = helper.Translation;
+            helper.Events.Input.ButtonPressed += OnButtonPressed;
 
             modConfig = Helper.ReadConfig<ModConfig>();
             buttonToBringUpInterface = modConfig.button;

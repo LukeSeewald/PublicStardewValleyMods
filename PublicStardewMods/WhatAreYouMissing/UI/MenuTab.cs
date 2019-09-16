@@ -119,7 +119,7 @@ namespace WhatAreYouMissing
             int y = yPositionOnScreen + Game1.tileSize * 5;
             int width = 850;
 
-            SpriteText.drawString(b, Constants.EMPTY_LIST_MESSAGE, x, y, width: width);
+            SpriteText.drawString(b, Utilities.GetTranslation("EMPTY_LIST_MESSAGE"), x, y, width: width);
         }
 
         public override void receiveLeftClick(int x, int y, bool playSound = true)
@@ -286,15 +286,15 @@ namespace WhatAreYouMissing
             switch (Name)
             {
                 case TabName.SpecificSeasonTab:
-                    return Constants.SEASON_SPECIFIC_HEADER;
+                    return Utilities.GetTranslation("SEASON_SPECIFIC_HEADER");
                 case TabName.SpecificCCSeasonTab:
-                    return Constants.SEASON_SPECIFIC_CC_HEADER;
+                    return Utilities.GetTranslation("SEASON_SPECIFIC_CC_HEADER");
                 case TabName.CommonCCTab:
-                    return Constants.COMMON_CC_HEADER;
+                    return Utilities.GetTranslation("COMMON_CC_HEADER");
                 case TabName.MerchantTab:
-                    return Constants.MERCHANT_HEADER;
+                    return Utilities.GetTranslation("MERCHANT_HEADER");
                 case TabName.CookedItemsTab:
-                    return Constants.COOKED_ITEMS_HEADER;
+                    return Utilities.GetTranslation("COOKED_ITEMS_HEADER");
                 default:
                     //Should never get here
                     return "Oopsies";

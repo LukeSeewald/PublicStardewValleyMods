@@ -33,18 +33,18 @@ namespace WhatAreYouMissing
         private void AddDisplayNames()
         {
 
-            AddName(Constants.GAME_NAME_SECRET_WOODS, Constants.DEFAULT_AREA_CODE, Constants.SECRET_WOODS_DISPLAY_NAME);
+            AddName(Constants.GAME_NAME_SECRET_WOODS, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("SECRET_WOODS_DISPLAY_NAME"));
 
-            AddName(Constants.GAME_NAME_TOWN_RIVER, Constants.DEFAULT_AREA_CODE, Constants.TOWN_RIVER_DISPLAY_NAME);
-            AddName(Constants.GAME_NAME_MOUNTAIN_LAKE, Constants.DEFAULT_AREA_CODE, Constants.MOUNTAIN_LAKE_DISPLAY_NAME);
-            AddName(Constants.GAME_NAME_BEACH, Constants.DEFAULT_AREA_CODE, Constants.BEACH_DISPLAY_NAME);
+            AddName(Constants.GAME_NAME_TOWN_RIVER, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("TOWN_RIVER_DISPLAY_NAME"));
+            AddName(Constants.GAME_NAME_MOUNTAIN_LAKE, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("MOUNTAIN_LAKE_DISPLAY_NAME"));
+            AddName(Constants.GAME_NAME_BEACH, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("BEACH_DISPLAY_NAME"));
 
-            AddName(Constants.GAME_NAME_SEWER, Constants.DEFAULT_AREA_CODE, Constants.SEWER_DISPLAY_NAME);
-            AddName(Constants.GAME_NAME_MUTANT_BUG_LAIR, Constants.DEFAULT_AREA_CODE, Constants.MUTANT_BUG_LAIR_DISPLAY_NAME);
+            AddName(Constants.GAME_NAME_SEWER, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("SEWER_DISPLAY_NAME"));
+            AddName(Constants.GAME_NAME_MUTANT_BUG_LAIR, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("MUTANT_BUG_LAIR_DISPLAY_NAME"));
 
-            AddName(Constants.GAME_NAME_MINES, Constants.DEFAULT_AREA_CODE, Constants.MINES_DISPLAY_NAME);
-            AddName(Constants.GAME_NAME_DESERT, Constants.DEFAULT_AREA_CODE, Constants.DESERT_DISPLAY_NAME);
-            AddName(Constants.GAME_NAME_WITCHS_SWAMP, Constants.DEFAULT_AREA_CODE, Constants.WITCHS_SWAMP_DISPLAY_NAME);
+            AddName(Constants.GAME_NAME_MINES, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("MINES_DISPLAY_NAME"));
+            AddName(Constants.GAME_NAME_DESERT, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("DESERT_DISPLAY_NAME"));
+            AddName(Constants.GAME_NAME_WITCHS_SWAMP, Constants.DEFAULT_AREA_CODE, Utilities.GetTranslation("WITCHS_SWAMP_DISPLAY_NAME"));
 
             AddCindersapForestNames();
         }
@@ -56,12 +56,12 @@ namespace WhatAreYouMissing
 
         private void AddCindersapForestNames()
         {
-            string[] pondAndRiver = new string[2] { Constants.CINDERSAP_POND_DISPLAY_NAME, Constants.CINDERSAP_RIVER_DISPLAY_NAME };
+            string[] pondAndRiver = new string[2] { Utilities.GetTranslation("CINDERSAP_POND_DISPLAY_NAME"), Utilities.GetTranslation("CINDERSAP_RIVER_DISPLAY_NAME")};
             Dictionary<int, string[]> cindersapDict = new Dictionary<int, string[]>
             {
                 [Constants.DEFAULT_AREA_CODE] = pondAndRiver,
-                [Constants.CINDERSAP_POND_AREA_CODE] = new string[1] { Constants.CINDERSAP_POND_DISPLAY_NAME },
-                [Constants.CINDERSAP_RIVER_AREA_CODE] = new string[1] { Constants.CINDERSAP_RIVER_DISPLAY_NAME },
+                [Constants.CINDERSAP_POND_AREA_CODE] = new string[1] { Utilities.GetTranslation("CINDERSAP_POND_DISPLAY_NAME")},
+                [Constants.CINDERSAP_RIVER_AREA_CODE] = new string[1] { Utilities.GetTranslation("CINDERSAP_RIVER_DISPLAY_NAME")},
             };
 
             PossibleLocationDisplayNames.Add(Constants.GAME_NAME_CINDERSAP_FOREST, cindersapDict);

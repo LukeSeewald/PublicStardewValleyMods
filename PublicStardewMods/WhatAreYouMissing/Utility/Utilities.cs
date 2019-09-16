@@ -192,5 +192,10 @@ namespace WhatAreYouMissing
             b.Draw(Game1.mouseCursors, coords, starSprite, Color.White, rotation,
                     originToDrawRelativeTo, scale, SpriteEffects.None, layerDepth);
         }
+
+        public static string GetTranslation(string key)
+        {
+            return ModEntry.Translator.Get(key);
+        }
     }
 }

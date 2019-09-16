@@ -28,7 +28,9 @@ namespace WhatAreYouMissing
         {
             foreach(KeyValuePair<string, string> recipe in RawRecipeData)
             {
-                int parentSheetIndex = ParseRecipeIndex(recipe.Value.Split('/')[2]);
+                //its possible that the recipe is "recipeIndex count" in some mods like 
+                //animal husbandry so I need the second split
+                int parentSheetIndex = ParseRecipeIndex(recipe.Value.Split('/')[2].Split(' ')[0]);
 
                 if(ShouldRecipeBeAdded(recipe.Key))
                 {
@@ -80,9 +82,12 @@ namespace WhatAreYouMissing
             Dictionary<string, string> RawRecipeData = Game1.content.Load<Dictionary<string, string>>("Data\\CookingRecipes");
             foreach (KeyValuePair<string, string> recipe in RawRecipeData)
             {
-                // data is ingredient amount ingredient amount ect.
+                // data is "ingredient amount ingredient amount" ect.
                 string[] ingredientsString = recipe.Value.Split('/')[0].Split(' ');
-                int recipeIndex = ParseRecipeIndex(recipe.Value.Split('/')[2]);
+
+                //its possible that the recipe is "recipeIndex count" in some mods like 
+                //animal husbandry so I need the second split
+                int recipeIndex = ParseRecipeIndex(recipe.Value.Split('/')[2].Split(' ')[0]);
                 for(int i = 0; i < ingredientsString.Length; ++i)
                 {
                     if (IsIngredient(i))
