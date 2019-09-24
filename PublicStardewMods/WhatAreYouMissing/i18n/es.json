@@ -50,5 +50,27 @@
  "LEGEND_INFO" : "Pescar en uno de los islotes del Lago de la montaña cuando llueve(primavera)",
  "GLACIERFISH_INFO" : "En el bosque Tizón, al cruzar los puentes (invierno)",
  "CRIMSONFISH_INFO" : "En la parte de la playa que se desbloquea reparando el puente(verano)",
- "ANGLER_INFO" : "Pescar hacia arriba en el pequeño puente cerca de JoJo Mart (otoño)"
+ "ANGLER_INFO": "Pescar hacia arriba en el pequeño puente cerca de JoJo Mart (otoño)",
+
+  "FARMING": "Farming",
+  "FISHING": "Fishing",
+  "MINING" : "Mining",
+  "LUCK": "Luck",
+  "FORAGING": "Foraging",
+  "MAX_ENERGY": "Max Energy",
+  "MAGNETISM": "Magnetism",
+  "SPEED": "Speed",
+  "DEFENSE": "Defense",
+  "ATTACK": "Attack",
+
+  "ENERGY": "Energy",
+  "HEALTH": "Health",
+  "BUFFS": "Buff(s)",
+  "DURATION": "Duration",
+  "MINUTE": "min",
+
+  "LOCATIONS": "Location(s)",
+  "SEASONS" : "Season(s)",
+  "WEATHER": "Weather",
+  "TIME" : "Time"
 }

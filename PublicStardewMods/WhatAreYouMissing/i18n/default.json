@@ -50,7 +50,27 @@
  "LEGEND_INFO" : "Fish close to the giant log in the Mountain Lake when its raining",
  "GLACIERFISH_INFO" : "At the bottom of the giant log in the Mountain Lake when its raining",
  "CRIMSONFISH_INFO" : "Second Beach Pier",
- "ANGLER_INFO" : "Fish upwards on the small bridge near JoJo Mart"
+ "ANGLER_INFO": "Fish upwards on the small bridge near JoJo Mart",
 
+  "FARMING": "Farming",
+  "FISHING": "Fishing",
+  "MINING" : "Mining",
+  "LUCK": "Luck",
+  "FORAGING": "Foraging",
+  "MAX_ENERGY": "Max Energy",
+  "MAGNETISM": "Magnetism",
+  "SPEED": "Speed",
+  "DEFENSE": "Defense",
+  "ATTACK": "Attack",
 
+  "ENERGY": "Energy",
+  "HEALTH": "Health",
+  "BUFFS": "Buff(s)",
+  "DURATION": "Duration",
+  "MINUTE": "min",
+
+  "LOCATIONS": "Location(s)",
+  "SEASONS" : "Season(s)",
+  "WEATHER": "Weather",
+  "TIME" : "Time"
 }

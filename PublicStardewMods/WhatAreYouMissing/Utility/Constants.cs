@@ -233,6 +233,7 @@ namespace WhatAreYouMissing
         //public const int GOLD_2500 = ; //Not sure about this 
 
         public const int SPICY_EEL = 226;
+        public const int DWARF_SCROLL_4 = 99;
 
         public const int COMMON_QUALITY = 0;
         public const int SILVER_QUALITY = 1;
