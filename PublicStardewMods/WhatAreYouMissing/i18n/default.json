@@ -68,6 +68,7 @@
   "BUFFS": "Buff(s)",
   "DURATION": "Duration",
   "MINUTE": "min",
+  "SECONDS" : "sec",
 
   "LOCATIONS": "Location(s)",
   "SEASONS" : "Season(s)",
