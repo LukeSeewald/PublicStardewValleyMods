@@ -168,7 +168,9 @@ namespace WhatAreYouMissing
                     }
                     b.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
                     if (!HoverText.Equals(""))
-                        drawHoverText(b, HoverText, Game1.smallFont);
+                    {
+                        Utilities.DrawHoverTextBox(b, HoverText, 4, 0);
+                    }
                 }
             }
             else

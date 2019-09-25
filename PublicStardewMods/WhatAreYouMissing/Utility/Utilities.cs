@@ -8,6 +8,7 @@ using StardewValley.Locations;
 using StardewModdingAPI;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using StardewValley.Menus;
 
 namespace WhatAreYouMissing
 {
@@ -17,7 +18,7 @@ namespace WhatAreYouMissing
         public bool ShowItemsFromLockedPlaces { get; }
         public bool ShowAllFishFromCurrentSeason { get; }
         public bool ShowAllRecipes { get; }
-        public bool AlwasyShowAllRecipes { get; }
+        public bool AlwaysShowAllRecipes { get; }
         public int CommonQualityAmount { get; }
         public int HighestQualityAmount { get; }
 
@@ -28,7 +29,7 @@ namespace WhatAreYouMissing
             ShowItemsFromLockedPlaces = showLockedItems;
             ShowAllFishFromCurrentSeason = showAllFishFromCurrentSeason;
             ShowAllRecipes = showAllRecipes;
-            AlwasyShowAllRecipes = alwaysShowAllRecipes;
+            AlwaysShowAllRecipes = alwaysShowAllRecipes;
             CommonQualityAmount = commonAmount;
             HighestQualityAmount = highestQualityAmount;
         }
@@ -191,6 +192,46 @@ namespace WhatAreYouMissing
 
             b.Draw(Game1.mouseCursors, coords, starSprite, Color.White, rotation,
                     originToDrawRelativeTo, scale, SpriteEffects.None, layerDepth);
+        }
+
+        public static void DrawHoverTextBox(SpriteBatch b, string text, int spaceBetweenLines, int padding)
+        {
+            string[] lines = text.Split('\n');
+            int lineHeight = (int)Game1.smallFont.MeasureString("ABC").Y;
+            Vector2 position = new Vector2(Game1.getOldMouseX() + 32, Game1.getOldMouseY() + 32);
+            Vector2 boxDimensions = new Vector2(Game1.smallFont.MeasureString(text).X, lines.Length * lineHeight);
+
+            boxDimensions.Y += 32 + (lines.Length - 1) * spaceBetweenLines + 4;
+            boxDimensions.X += 32;
+
+            if(IsGoingOutOfXView((int)position.X, (int)boxDimensions.X))
+            {
+                position.X = Game1.viewport.Width - boxDimensions.X;
+            }
+            if(IsGoingOutOfYView((int)position.Y, (int)boxDimensions.Y))
+            {
+                position.Y = Game1.getOldMouseY() - boxDimensions.Y;
+            }
+
+            IClickableMenu.drawTextureBox(b, Game1.menuTexture, new Rectangle(0, 256, 60, 60), (int)position.X, (int)position.Y, (int)boxDimensions.X, (int)boxDimensions.Y, Color.White);
+
+            position.X += 16;
+            position.Y += 16 + 4;
+            for (int i = 0; i < lines.Length; ++i)
+            {
+                b.DrawString(Game1.smallFont, lines[i], position, Game1.textColor);
+                position.Y += Game1.smallFont.MeasureString(lines[i]).Y + spaceBetweenLines;
+            }
+        }
+
+        private static bool IsGoingOutOfXView(int x, int width)
+        {
+            return x + width > Game1.viewport.Width;
+        }
+
+        private static bool IsGoingOutOfYView(int y, int height)
+        {
+            return y + height > Game1.viewport.Height;
         }
 
         public static string GetTranslation(string key)

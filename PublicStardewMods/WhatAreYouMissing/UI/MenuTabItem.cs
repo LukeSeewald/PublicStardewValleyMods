@@ -87,10 +87,5 @@ namespace WhatAreYouMissing
                     break;
             }
         }
-
-        public void performHoverAction(int x, int y)
-        {
-
-        }
     }
 }

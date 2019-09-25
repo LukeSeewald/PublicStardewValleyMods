@@ -294,7 +294,7 @@ namespace WhatAreYouMissing
             foreach(KeyValuePair<int, SObject> pair in AvailableRecipes)
             {
                 int commonQualityAmountMissing = HowManyMissingCommonQuality(new SObject(pair.Key, 1, quality: Constants.COMMON_QUALITY));
-                if(commonQualityAmountMissing != 0 || ModEntry.Config.AlwasyShowAllRecipes)
+                if(commonQualityAmountMissing != 0 || ModEntry.Config.AlwaysShowAllRecipes)
                 {
                     MissingRecipes.Add(new SObject(pair.Key, commonQualityAmountMissing == 0 ? 1 : commonQualityAmountMissing));
                 }
