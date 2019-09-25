@@ -194,7 +194,7 @@ namespace WhatAreYouMissing
                     originToDrawRelativeTo, scale, SpriteEffects.None, layerDepth);
         }
 
-        public static void DrawHoverTextBox(SpriteBatch b, string text, int spaceBetweenLines, int padding)
+        public static void DrawHoverTextBox(SpriteBatch b, string text, int spaceBetweenLines)
         {
             string[] lines = text.Split('\n');
             int lineHeight = (int)Game1.smallFont.MeasureString("ABC").Y;

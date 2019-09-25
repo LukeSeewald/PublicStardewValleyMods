@@ -169,7 +169,7 @@ namespace WhatAreYouMissing
                     b.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
                     if (!HoverText.Equals(""))
                     {
-                        Utilities.DrawHoverTextBox(b, HoverText, 4, 0);
+                        Utilities.DrawHoverTextBox(b, HoverText, 4);
                     }
                 }
             }
