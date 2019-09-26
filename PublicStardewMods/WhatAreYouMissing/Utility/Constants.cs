@@ -259,6 +259,14 @@ namespace WhatAreYouMissing
         public const string GAME_NAME_MUTANT_BUG_LAIR = "BugLand";
         public const string GAME_NAME_WITCHS_SWAMP = "WitchSwamp";
 
+        public const int MUTANT_CARP = 682;
+        //public const int GREEN_ALGAE = 153;
+        //public const int WHITE_ALGAE = 157;
+        //public const int SEAWEED = 152;
+
+        //public readonly ReadOnlyCollection<int> ALGAE_AND_SEAWEED = new ReadOnlyCollection<int>(
+        //                                        new List<int> { GREEN_ALGAE, WHITE_ALGAE, SEAWEED });
+
         public readonly ReadOnlyDictionary<int, string> LEGNEDARY_FISH_INFO = new ReadOnlyDictionary<int, string>(
                                                 new Dictionary<int, string>()
                                                 {
@@ -269,10 +277,10 @@ namespace WhatAreYouMissing
                                                 });
 
         public readonly ReadOnlyCollection<int> LEGENDARY_FISH = new ReadOnlyCollection<int>(
-                                                new List<int> { LEGEND, GLACIERFISH, CRIMSONFISH, ANGLER });
+                                                new List<int> { LEGEND, GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });
 
         public readonly ReadOnlyCollection<int> ITEMS_PLAYER_CAN_ONLY_HAVE_ONE_OF = new ReadOnlyCollection<int>(
-                                                new List<int> { GLACIERFISH, CRIMSONFISH, ANGLER });
+                                                new List<int> { GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });
 
         public readonly ReadOnlyCollection<int> NIGHT_MARKET_FISH = new ReadOnlyCollection<int>(
                                                 new List<int> { MIDNIGHT_SQUID, SPOOK_FISH, BLOBFISH });

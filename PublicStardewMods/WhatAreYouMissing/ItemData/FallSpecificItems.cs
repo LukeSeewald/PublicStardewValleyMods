@@ -73,23 +73,25 @@ namespace WhatAreYouMissing
 
         private void AddFish()
         {
-            AddFish(Constants.ANCHOVY);
-            AddFish(Constants.SARDINE);
-            AddFish(Constants.SMALLMOUTH_BASS);
-            AddFish(Constants.SALMON);
-            AddFish(Constants.WALLEYE);
-            AddFish(Constants.CATFISH);
-            AddFish(Constants.EEL);
-            AddFish(Constants.RED_SNAPPER);
-            AddFish(Constants.SEA_CUCUMBER);
-            AddFish(Constants.SUPER_CUCUMBER);
-            AddFish(Constants.TIGER_TROUT);
-            AddFish(Constants.TILAPIA);
-            AddFish(Constants.ALBACORE);
-            AddFish(Constants.SHAD);
+            //AddFish(Constants.ANCHOVY);
+            //AddFish(Constants.SARDINE);
+            //AddFish(Constants.SMALLMOUTH_BASS);
+            //AddFish(Constants.SALMON);
+            //AddFish(Constants.WALLEYE);
+            //AddFish(Constants.CATFISH);
+            //AddFish(Constants.EEL);
+            //AddFish(Constants.RED_SNAPPER);
+            //AddFish(Constants.SEA_CUCUMBER);
+            //AddFish(Constants.SUPER_CUCUMBER);
+            //AddFish(Constants.TIGER_TROUT);
+            //AddFish(Constants.TILAPIA);
+            //AddFish(Constants.ALBACORE);
+            //AddFish(Constants.SHAD);
 
+            AddNormalSeasonalFish();
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 2 && !Game1.player.fishCaught.ContainsKey(Constants.ANGLER)))
             {
+                AddFish(Constants.CATFISH);
                 AddFish(Constants.ANGLER);
             }
         }

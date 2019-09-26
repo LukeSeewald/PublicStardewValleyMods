@@ -55,18 +55,20 @@ namespace WhatAreYouMissing
 
         private void AddFish()
         {
-            AddFish(Constants.ANCHOVY);
-            AddFish(Constants.SMALLMOUTH_BASS);
-            AddFish(Constants.CATFISH);
-            AddFish(Constants.EEL);
-            AddFish(Constants.SHAD);
-            AddFish(Constants.SUNFISH);
-            AddFish(Constants.HERRING);
-            AddFish(Constants.SARDINE);
-            AddFish(Constants.HALIBUT);
+            //AddFish(Constants.ANCHOVY);
+            //AddFish(Constants.SMALLMOUTH_BASS);
+            //AddFish(Constants.CATFISH);
+            //AddFish(Constants.EEL);
+            //AddFish(Constants.SHAD);
+            //AddFish(Constants.SUNFISH);
+            //AddFish(Constants.HERRING);
+            //AddFish(Constants.SARDINE);
+            //AddFish(Constants.HALIBUT);
             //The Legend requires level 10 fishing
+            AddNormalSeasonalFish();
             if (Config.ShowAllFishFromCurrentSeason || Game1.player.getEffectiveSkillLevel(1) == 10)
             {
+                AddFish(Constants.CATFISH);
                 AddFish(Constants.LEGEND);
             }
         }

@@ -68,6 +68,11 @@ namespace WhatAreYouMissing
             return Game1.player.caveChoice.Value == 1;
         }
 
+        public static bool IsWitchsSwampUnlocked()
+        {
+            return Game1.player.hasDarkTalisman;
+        }
+
         public static bool CheckMerchantForItemAndSeed(int item)
         {
             CropConversion cropConverter = new CropConversion();
@@ -220,7 +225,7 @@ namespace WhatAreYouMissing
             for (int i = 0; i < lines.Length; ++i)
             {
                 b.DrawString(Game1.smallFont, lines[i], position, Game1.textColor);
-                position.Y += Game1.smallFont.MeasureString(lines[i]).Y + spaceBetweenLines;
+                position.Y += lineHeight + spaceBetweenLines;
             }
         }
 
@@ -237,6 +242,11 @@ namespace WhatAreYouMissing
         public static string GetTranslation(string key)
         {
             return ModEntry.Translator.Get(key);
+        }
+
+        public static bool IsTempOrFishingGameLocation(string location)
+        {
+            return location == "Temp" || location == "fishingGame";
         }
     }
 }

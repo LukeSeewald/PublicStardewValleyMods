@@ -27,13 +27,19 @@ namespace WhatAreYouMissing
         {
             Config = ModEntry.Config;
             items = new Dictionary<int, SObject>();
-
             AddItems();
         }
 
         protected void AddFish(int parentSheetIndex)
         {
             Dictionary<int, string> data = Game1.content.Load<Dictionary<int, string>>("Data\\Fish");
+            if (!data.ContainsKey(parentSheetIndex))
+            {
+                //Some mods may have fish in locations without conditions but only
+                //add the fish data to fish xnb based on conditions
+                //so it could be missing
+                return;
+            }
             switch (data[parentSheetIndex].Split('/')[7])
             {
                 case "sunny":
@@ -107,7 +113,7 @@ namespace WhatAreYouMissing
             }
         }
 
-        private void ParseLocationData()
+        protected void AddNormalSeasonalFish()
         {
             Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
             int seasonIndex = SeasonNameToIndex(Game1.currentSeason);
@@ -120,13 +126,65 @@ namespace WhatAreYouMissing
                     if(i % 2 == 0)
                     {
                         //Its a parent sheet index
-                        AddFish(int.Parse(seasonalFish[i]));
+                        int parentSheetIndex = int.Parse(seasonalFish[i]);
+                        
+                        //I want to add them manually, -1 means no fish at this location
+                        if (IsNormalFish(parentSheetIndex) & !InAllSeasons(parentSheetIndex))
+                        {
+                            AddFish(parentSheetIndex);
+                        }
                     }
                 }
             }
         }
 
+        private bool IsNormalFish(int parentSheetIndex)
+        {
+            if(parentSheetIndex == -1)
+            {
+                return false;
+            }
 
+            Constants constants = new Constants();
 
+            string[] typeAndCategory = null;
+            int category = -1;
+            bool notAFish = false;
+            if (Game1.objectInformation.ContainsKey(parentSheetIndex))
+            {
+                typeAndCategory = Game1.objectInformation[parentSheetIndex].Split('/')[3].Split(' ');
+                if (typeAndCategory.Length > 1)
+                {
+                    category = int.Parse(typeAndCategory[1]);
+                }
+                else
+                {
+                    //Things like Algae don't have the category -4 (fish category)
+                    //they only have the word Fish
+                    //i.e Fish vs Fish -4
+                    notAFish = true;
+                }
+            }
+
+            return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && category != SObject.junkCategory && !notAFish && parentSheetIndex != Constants.CATFISH;
+        }
+
+        private bool InAllSeasons(int parentSheetIndex)
+        {
+            bool[] foundInAllSeasons = new bool[4] { false, false, false, false};
+            Dictionary<string, string> locationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
+            foreach (KeyValuePair<string, string> data in locationData)
+            {
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
+                {
+                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
+                    if (seasonalFish.Contains(parentSheetIndex.ToString()))
+                    {
+                        foundInAllSeasons[season - (int)SeasonIndex.Spring] = true;
+                    }
+                }
+            }
+            return !foundInAllSeasons.Contains(false);
+        }
     }
 }

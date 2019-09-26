@@ -62,10 +62,40 @@ namespace WhatAreYouMissing
             {
                 return GetCrabPotDisplayInfo();
             }
+            else if (ParentSheetIndex == Constants.CATFISH)
+            {
+                return GetCatfishInfo();
+            }
             else
             {
                 return GetNormalFishDisplayInfo();
             }
+        }
+
+        private string GetCatfishInfo()
+        {
+            string displayInfo = Utilities.GetTranslation("LOCATIONS") + ": " + Utilities.GetTranslation("CINDERSAP_RIVER_DISPLAY_NAME") + ", " + Utilities.GetTranslation("TOWN_RIVER_DISPLAY_NAME") + "\n";
+            displayInfo += Utilities.GetTranslation("SEASONS") + ": " + Utilities.GetTranslation("SPRING") + ", " + Utilities.GetTranslation("FALL") + "\n";
+            displayInfo += Utilities.GetTranslation("WEATHER") + ": " + Utilities.GetTranslation("RAINY_WEATHER") + "\n";
+
+            displayInfo += "\n";
+
+            displayInfo += "Special Cases \n";
+            displayInfo += Utilities.GetTranslation("LOCATIONS") + ": " + Utilities.GetTranslation("SECRET_WOODS_DISPLAY_NAME") + "\n";
+            displayInfo += Utilities.GetTranslation("SEASONS") + ": " + "Any Season \n";
+            displayInfo += Utilities.GetTranslation("WEATHER") + ": " + Utilities.GetTranslation("RAINY_WEATHER") + "\n";
+
+            displayInfo += "\n";
+
+            displayInfo += Utilities.GetTranslation("LOCATIONS") + ": " + Utilities.GetTranslation("WITCHS_SWAMP_DISPLAY_NAME") + "\n";
+            displayInfo += Utilities.GetTranslation("SEASONS") + ": " + "Any Season \n";
+            displayInfo += Utilities.GetTranslation("WEATHER") + ": " + Utilities.GetTranslation("ANY_WEATHER") + "\n";
+
+            displayInfo += "\n";
+
+            displayInfo += Utilities.GetTranslation("TIME") + ": " + GetAllPeriodsToCatchDisplayInfo();
+
+            return displayInfo;
         }
 
         private string GetNormalFishDisplayInfo()
@@ -266,7 +296,7 @@ namespace WhatAreYouMissing
             List<string> seasons = new List<string>();
             foreach (KeyValuePair<string, string> data in LocationData)
             {
-                for (int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter; ++season)
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
                     string seasonStr = GetTranslatedSeason((SeasonIndex)season);
