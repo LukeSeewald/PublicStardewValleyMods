@@ -81,5 +81,52 @@ namespace WhatAreYouMissing
                 items.Add(parentSheetIndex, new SObject(parentSheetIndex, stackSize));
             }
         }
+
+        private enum SeasonIndex
+        {
+            Spring = 4,
+            Summer = 5,
+            Fall = 6,
+            Winter = 7
+        };
+
+        private int SeasonNameToIndex(string season)
+        {
+            switch (season)
+            {
+                case "spring":
+                    return (int)SeasonIndex.Spring;
+                case "summer":
+                    return (int)SeasonIndex.Summer;
+                case "fall":
+                    return (int)SeasonIndex.Fall;
+                case "winter":
+                    return (int)SeasonIndex.Winter;
+                default:
+                    return -1;
+            }
+        }
+
+        private void ParseLocationData()
+        {
+            Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
+            int seasonIndex = SeasonNameToIndex(Game1.currentSeason);
+
+            foreach (KeyValuePair<string, string> data in LocationData)
+            {
+                string[] seasonalFish = data.Value.Split('/')[seasonIndex].Split(' ');
+                for(int i = 0; i < seasonalFish.Length; ++i)
+                {
+                    if(i % 2 == 0)
+                    {
+                        //Its a parent sheet index
+                        AddFish(int.Parse(seasonalFish[i]));
+                    }
+                }
+            }
+        }
+
+
+
     }
 }
