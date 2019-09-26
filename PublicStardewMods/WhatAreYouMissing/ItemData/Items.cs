@@ -175,7 +175,7 @@ namespace WhatAreYouMissing
             Dictionary<string, string> locationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
             foreach (KeyValuePair<string, string> data in locationData)
             {
-                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
                     if (seasonalFish.Contains(parentSheetIndex.ToString()))

@@ -8,6 +8,52 @@ using SObject = StardewValley.Object;
 
 namespace WhatAreYouMissing
 {
+    public struct LocationSeasonsWeatherFishInfo
+    {
+        private List<string> Locations;
+        private List<string> Seasons;
+        private string Weather;
+        
+        public LocationSeasonsWeatherFishInfo(string location, string season, string weather)
+        {
+            Locations = new List<string>() { location };
+            Seasons = new List<string>() { season };
+            Weather = weather;
+        }
+
+        public void AddSeason(string season)
+        {
+            if (!Seasons.Contains(season))
+            {
+                Seasons.Add(season);
+            }
+        }
+
+        public void AddLocation(string location)
+        {
+            if (!Locations.Contains(location))
+            {
+                Locations.Add(location);
+            }
+        }
+
+        public List<string> GetLocations()
+        {
+            return Locations;
+        }
+
+        public List<string> GetSeasons()
+        {
+            return Seasons;
+        }
+
+        public string GetWeather()
+        {
+            return Weather;
+        }
+
+
+    }
     public class ItemDisplayInfo
     {
         private enum SeasonIndex
@@ -62,13 +108,13 @@ namespace WhatAreYouMissing
             {
                 return GetCrabPotDisplayInfo();
             }
-            else if (ParentSheetIndex == Constants.CATFISH)
-            {
-                return GetCatfishInfo();
-            }
+            //else if (ParentSheetIndex == Constants.CATFISH)
+            //{
+            //    return GetCatfishInfo();
+            //}
             else
             {
-                return GetNormalFishDisplayInfo();
+                return GetNormalFishDisplayInfo2();
             }
         }
 
@@ -112,6 +158,114 @@ namespace WhatAreYouMissing
             displayInfo += Utilities.GetTranslation("SEASONS") + ": " + string.Join(", ", seasons) + "\n";
 
             return displayInfo + Utilities.GetTranslation("WEATHER") + ": " + weather + "\n" + Utilities.GetTranslation("TIME") + ": " + periodToCatch;
+        }
+
+        private string GetNormalFishDisplayInfo2()
+        {
+            string periodToCatch = GetAllPeriodsToCatchDisplayInfo();
+            string displayInfo = "";
+            List<LocationSeasonsWeatherFishInfo> fishInfo = GetFishLocationSeasonsWeatherInfo();
+            foreach (LocationSeasonsWeatherFishInfo info in fishInfo)
+            {
+                displayInfo += Utilities.GetTranslation("LOCATIONS") + ": " + string.Join(", ", info.GetLocations()) + "\n";
+
+                displayInfo += Utilities.GetTranslation("SEASONS") + ": " + string.Join(", ", info.GetSeasons()) + "\n";
+
+                displayInfo += Utilities.GetTranslation("WEATHER") + ": " + info.GetWeather() + "\n";
+
+                displayInfo += fishInfo.Count > 1 ? "\n" : "";
+            }
+
+            return displayInfo + Utilities.GetTranslation("TIME") + ": " + periodToCatch;
+        }
+
+        private List<LocationSeasonsWeatherFishInfo> GetFishLocationSeasonsWeatherInfo()
+        {
+            Dictionary<string, LocationSeasonsWeatherFishInfo> tempResult = new Dictionary<string, LocationSeasonsWeatherFishInfo>();
+
+            foreach (KeyValuePair<string, string> data in LocationData)
+            {
+                for (int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter + 1; ++season)
+                {
+                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
+                    if (seasonalFish.Contains(ParentSheetIndex.ToString()))
+                    {
+                        int areaCode = GetAreaCode(seasonalFish);
+
+                        string[] locationDisplayNames = GetLocationDisplayNames(data.Key, areaCode);
+                        foreach (string name in locationDisplayNames)
+                        {
+                            if (name != "" && !tempResult.ContainsKey(name))
+                            {
+                                LocationSeasonsWeatherFishInfo info = new LocationSeasonsWeatherFishInfo(name, GetTranslatedSeason((SeasonIndex)season), GetWeatherDisplayInfoForFish());
+                                tempResult.Add(name, info);
+
+                                //The forest farm pond is not stored in locations data and 
+                                //it is the same as the cindersap pond but with the addition
+                                //of the woodskip
+                                if (!tempResult.ContainsKey(Utilities.GetTranslation("FOREST_FARM_POND_DIAPLAY_NAME")) && ParentSheetIndex == Constants.WOODSKIP)
+                                {
+                                    tempResult.Add(Utilities.GetTranslation("FOREST_FARM_POND_DIAPLAY_NAME"), new LocationSeasonsWeatherFishInfo(name, GetTranslatedSeason((SeasonIndex)season), GetWeatherDisplayInfoForFish()));
+                                }
+                            }
+                            else if(name != "")
+                            {
+                                //It is a different Season
+                                LocationSeasonsWeatherFishInfo info = tempResult[name];
+                                info.AddSeason(GetTranslatedSeason((SeasonIndex)season));
+                            }
+                        }
+                    }
+                }
+            }
+
+            List<LocationSeasonsWeatherFishInfo> result = new List<LocationSeasonsWeatherFishInfo>();
+            foreach(KeyValuePair<string, LocationSeasonsWeatherFishInfo> pair in tempResult)
+            {
+                if(result.Count == 0)
+                {
+                    result.Add(pair.Value);
+                }
+                bool addedInfo = false;
+                foreach(LocationSeasonsWeatherFishInfo info in result)
+                {
+                    if(DoesOtherLocationHaveSameData(pair.Value, info))
+                    {
+                        addedInfo = true;
+                        foreach(string location in pair.Value.GetLocations())
+                        {
+                            info.AddLocation(location);
+                        }
+                    }
+                }
+                if (!addedInfo)
+                {
+                    result.Add(pair.Value);
+                }
+                
+            }
+            return result;
+        }
+
+        private bool DoesOtherLocationHaveSameData(LocationSeasonsWeatherFishInfo info, LocationSeasonsWeatherFishInfo newInfo)
+        {
+            bool sameSeason = true;
+            if(info.GetSeasons().Count != newInfo.GetSeasons().Count)
+            {
+                return false;
+            }
+            else
+            {
+                foreach(string season in info.GetSeasons())
+                {
+                    if (!newInfo.GetSeasons().Contains(season))
+                    {
+                        return false;
+                    }
+                }
+            }
+            bool sameWeather = info.GetWeather().Equals(newInfo.GetWeather());
+            return sameSeason && sameWeather;
         }
 
         private string GetCookedItemsDisplayInfo()
@@ -296,7 +450,7 @@ namespace WhatAreYouMissing
             List<string> seasons = new List<string>();
             foreach (KeyValuePair<string, string> data in LocationData)
             {
-                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
                     string seasonStr = GetTranslatedSeason((SeasonIndex)season);
@@ -349,7 +503,7 @@ namespace WhatAreYouMissing
 
             foreach (KeyValuePair<string, string> data in LocationData)
             {
-                for(int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter; ++season)
+                for(int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter + 1; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
                     if (seasonalFish.Contains(ParentSheetIndex.ToString()))

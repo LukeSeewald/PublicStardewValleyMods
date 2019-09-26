@@ -27,7 +27,11 @@ namespace WhatAreYouMissing
                     return displayNames[areaCode];
                 }
             }
-            return new string[1] { "" };
+            if (Utilities.IsTempOrFishingGameOrBackwoodsLocation(gameName))
+            {
+                return new string[1] { "" };
+            }
+            return new string[1] { gameName };
         }
 
         private void AddDisplayNames()

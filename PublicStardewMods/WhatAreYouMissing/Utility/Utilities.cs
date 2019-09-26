@@ -244,9 +244,9 @@ namespace WhatAreYouMissing
             return ModEntry.Translator.Get(key);
         }
 
-        public static bool IsTempOrFishingGameLocation(string location)
+        public static bool IsTempOrFishingGameOrBackwoodsLocation(string location)
         {
-            return location == "Temp" || location == "fishingGame";
+            return location == "Temp" || location == "fishingGame" || location == "Backwoods";
         }
     }
 }
