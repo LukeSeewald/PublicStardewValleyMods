@@ -87,32 +87,8 @@ namespace WhatAreYouMissing
 
         private void AddFish()
         {
-            //AddFish(Constants.PUFFERFISH);
-            //AddFish(Constants.TUNA);
-            //AddFish(Constants.RAINBOW_TROUT);
-            //AddFish(Constants.CATFISH);
-            //AddFish(Constants.PIKE);
-            //AddFish(Constants.SUNFISH);
-            //AddFish(Constants.RED_MULLET);
-            //AddFish(Constants.OCTOPUS);
-            //AddFish(Constants.RED_SNAPPER);
-            //AddFish(Constants.SUPER_CUCUMBER);
-            //AddFish(Constants.STURGEON);
-            //AddFish(Constants.TILAPIA);
-            //AddFish(Constants.DORADO);
-            //AddFish(Constants.SHAD);
-            //AddFish(Constants.HALIBUT);
-
             AddNormalSeasonalFish("summer");
-            //if(Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
-            //{
-            //    AddFish(Constants.CATFISH);
-            //}
-            //if(Config.ShowAllFishFromCurrentSeason || Utilities.IsWitchsSwampUnlocked())
-            //{
-            //    //Don't need the weather check
-            //    AddOneCommonObject(Constants.CATFISH);
-            //}
+
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 4 && !Game1.player.fishCaught.ContainsKey(Constants.CRIMSONFISH)))
             {
                 AddFish(Constants.CRIMSONFISH);

@@ -2,14 +2,16 @@
   "SEASON_SPECIFIC_HEADER": "Season Items",
   "SEASON_SPECIFIC_CC_HEADER": "Season Community Center Items",
   "COMMON_CC_HEADER": "Common Community Center Items",
-  "MERCHANT_HEADER": "Travelling Cart Items",
+  "SPECIFIC_MERCHANT_HEADER": "Seasonal Travelling Cart Items",
+  "CCMERCHANT_HEADER": "CC Travelling Cart Items",
   "COOKED_ITEMS_HEADER": "Cooked Items",
   "FISH_TAB_HEADER": "All Fish",
 
   "SEASON_SPECIFIC_DESCRIPTION": "Missing items specific to this season",
   "SEASON_SPECIFIC_CC_DESCRIPTION": "Missing Community Center items specific to this season",
   "COMMON_CC_DESCRIPTION": "Missing Community Center items common to all seasons",
-  "MERCHANT_DESCRIPTION": "Missing uncommon items that are available from the Travelling Cart",
+  "SPECIFIC_MERCHANT_DESCRIPTION": "Missing Specific Season items that are available from the Travelling Cart",
+  "CCMERCHANT_DESCRIPTION": "Missing Community Center items that are available from the Travelling Cart",
   "COOKED_ITEMS_DESCRIPTION": "Missing cooked items that you know how to make",
   "FISH_TAB_DESCRIPTION": "All of the Fish that can be obtained",
 

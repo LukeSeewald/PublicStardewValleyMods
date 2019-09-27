@@ -291,8 +291,10 @@ namespace WhatAreYouMissing
                     return Utilities.GetTranslation("SEASON_SPECIFIC_CC_HEADER");
                 case TabName.CommonCCTab:
                     return Utilities.GetTranslation("COMMON_CC_HEADER");
-                case TabName.MerchantTab:
-                    return Utilities.GetTranslation("MERCHANT_HEADER");
+                case TabName.SpecificMerchantTab:
+                    return Utilities.GetTranslation("SPECIFIC_MERCHANT_HEADER");
+                case TabName.CCMerchantTab:
+                    return Utilities.GetTranslation("CCMERCHANT_HEADER");
                 case TabName.CookedItemsTab:
                     return Utilities.GetTranslation("COOKED_ITEMS_HEADER");
                 case TabName.FishTab:

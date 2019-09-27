@@ -2,14 +2,16 @@
   "SEASON_SPECIFIC_HEADER": "Objetos de temporada",
   "SEASON_SPECIFIC_CC_HEADER": "Objetos de temporada del Centro cívico",
   "COMMON_CC_HEADER": "Objetos comunes del Centro cívico",
-  "MERCHANT_HEADER": "Objetos del carro ambulante",
+  "SPECIFIC_MERCHANT_HEADER": "",
+  "CCMERCHANT_HEADER": "",
   "COOKED_ITEMS_HEADER": "Recetas",
   "FISH_TAB_HEADER": "",
 
   "SEASON_SPECIFIC_DESCRIPTION": "Objetos específicos que te faltan de la estación actual",
   "SEASON_SPECIFIC_CC_DESCRIPTION": "Objetos específicos de la estación actual que te faltan del centro cívico",
   "COMMON_CC_DESCRIPTION": "Objetos comunes a todas las estaciones que te faltan del centro cívico",
-  "MERCHANT_DESCRIPTION": "Objetos raros que te faltan y están disponibles en el carro ambulante",
+  "SPECIFIC_MERCHANT_DESCRIPTION": "",
+  "CCMERCHANT_DESCRIPTION": "",
   "COOKED_ITEMS_DESCRIPTION": "Las recetas que sabes hacer pero que te faltan",
   "FISH_TAB_DESCRIPTION": "",
 

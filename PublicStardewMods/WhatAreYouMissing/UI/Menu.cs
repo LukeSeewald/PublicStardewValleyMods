@@ -18,9 +18,10 @@ namespace WhatAreYouMissing
         SpecificSeasonTab = 0,
         SpecificCCSeasonTab = 1,
         CommonCCTab = 2,
-        MerchantTab = 3,
-        CookedItemsTab = 4,
-        FishTab = 5
+        SpecificMerchantTab = 3,
+        CCMerchantTab = 4,
+        CookedItemsTab = 5,
+        FishTab = 6
 
     }
     public class Menu : IClickableMenu
@@ -33,12 +34,13 @@ namespace WhatAreYouMissing
         public const int REGION_SEASON_TAB = 16430;
         public const int REGION_CC_SEASON_TAB = 16431;
         public const int REGION_CC_COMMON_TAB = 16432;
-        public const int REGION_MERCHANT_TAB = 16433;
-        public const int REGION_RECIPES_TAB = 16434;
-        public const int REGION_FISH_TAB = 16434;
+        public const int REGION_SPECIFIC_MERCHANT_TAB = 16433;
+        public const int REGION_CCMERCHANT_TAB = 16434;
+        public const int REGION_RECIPES_TAB = 16435;
+        public const int REGION_FISH_TAB = 16436;
 
 
-        public const int NUM_TABS = 6;
+        public const int NUM_TABS = 7;
 
         public int CurrentTab;
         private bool invisible;
@@ -96,7 +98,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.JELLY);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.MerchantTab)), TabName.MerchantTab.ToString(), Utilities.GetTranslation("MERCHANT_DESCRIPTION"))
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.SpecificMerchantTab)), TabName.SpecificMerchantTab.ToString(), Utilities.GetTranslation("SPECIFIC_MERCHANT_DESCRIPTION"))
             {
                 myID = 16433,
                 downNeighborID = 3,
@@ -107,7 +109,7 @@ namespace WhatAreYouMissing
             });
             tabIconParentSheetIndices.Add(Constants.RARE_SEED);
 
-            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CookedItemsTab)), TabName.CookedItemsTab.ToString(), Utilities.GetTranslation("COOKED_ITEMS_DESCRIPTION"))
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CCMerchantTab)), TabName.CCMerchantTab.ToString(), Utilities.GetTranslation("CCMERCHANT_DESCRIPTION"))
             {
                 myID = 16434,
                 downNeighborID = 4,
@@ -116,12 +118,23 @@ namespace WhatAreYouMissing
                 tryDefaultIfNoDownNeighborExists = true,
                 fullyImmutable = true
             });
+            tabIconParentSheetIndices.Add(Constants.RABBITS_FOOT);
+
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CookedItemsTab)), TabName.CookedItemsTab.ToString(), Utilities.GetTranslation("COOKED_ITEMS_DESCRIPTION"))
+            {
+                myID = 16435,
+                downNeighborID = 5,
+                rightNeighborID = 16436,
+                leftNeighborID = 16434,
+                tryDefaultIfNoDownNeighborExists = true,
+                fullyImmutable = true
+            });
             tabIconParentSheetIndices.Add(Constants.SPICY_EEL);
 
             tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.FishTab)), TabName.FishTab.ToString(), Utilities.GetTranslation("FISH_TAB_DESCRIPTION"))
             {
-                myID = 16435,
-                leftNeighborID = 16434,
+                myID = 16436,
+                leftNeighborID = 16435,
                 tryDefaultIfNoDownNeighborExists = true,
                 fullyImmutable = true
             });
@@ -138,13 +151,9 @@ namespace WhatAreYouMissing
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.SpecificSeasonTab, ModEntry.MissingItems.GetMissingSpecifics()));
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.SpecificCCSeasonTab, ModEntry.MissingItems.GetMissingSpecificCCItems()));
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CommonCCTab, ModEntry.MissingItems.GetMissingCommonCCItems()));
-
-            List<SObject> allMissingMerchantItems = ModEntry.MissingItems.GetMissingMerchantCCItems();
-            allMissingMerchantItems.AddRange(ModEntry.MissingItems.GetMissingMerchantItems());
-            pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.MerchantTab, allMissingMerchantItems ));
-
+            pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CCMerchantTab, ModEntry.MissingItems.GetMissingMerchantCCItems()));
+            pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.SpecificMerchantTab, ModEntry.MissingItems.GetMissingMerchantItems()));
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CookedItemsTab, ModEntry.MissingItems.GetMissingRecipes()));
-
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.FishTab, ModEntry.MissingItems.GetMissingFish()));
         }
 
