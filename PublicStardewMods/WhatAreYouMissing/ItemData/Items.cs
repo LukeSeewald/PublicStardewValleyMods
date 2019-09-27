@@ -129,7 +129,7 @@ namespace WhatAreYouMissing
                         int parentSheetIndex = int.Parse(seasonalFish[i]);
                         
                         //I want to add them manually, -1 means no fish at this location
-                        if (IsNormalFish(parentSheetIndex) & !InAllSeasons(parentSheetIndex))
+                        if (IsNormalFish(parentSheetIndex) && NotInAllSeasons(parentSheetIndex))
                         {
                             AddFish(parentSheetIndex);
                         }
@@ -140,33 +140,32 @@ namespace WhatAreYouMissing
 
         private bool IsNormalFish(int parentSheetIndex)
         {
-            if(parentSheetIndex == -1)
+            //Sometimes a mod can put the info into location data but not edit fish data
+            //or object info so the mod it is meant to support doesn't exist
+            //on this machine. Just double check
+            if (parentSheetIndex == -1 || !Game1.objectInformation.ContainsKey(parentSheetIndex))
             {
                 return false;
             }
 
-            Constants constants = new Constants();
-
-            string[] typeAndCategory = null;
             int category = -1;
             bool notAFish = false;
-            if (Game1.objectInformation.ContainsKey(parentSheetIndex))
+
+            string[] typeAndCategory = Game1.objectInformation[parentSheetIndex].Split('/')[3].Split(' ');
+            if (typeAndCategory.Length > 1)
             {
-                typeAndCategory = Game1.objectInformation[parentSheetIndex].Split('/')[3].Split(' ');
-                if (typeAndCategory.Length > 1)
-                {
-                    category = int.Parse(typeAndCategory[1]);
-                }
-                else
-                {
-                    //Things like Algae don't have the category -4 (fish category)
-                    //they only have the word Fish
-                    //i.e Fish vs Fish -4
-                    notAFish = true;
-                }
+                category = int.Parse(typeAndCategory[1]);
+            }
+            else
+            {
+                //Things like Algae don't have the category -4 (fish category)
+                //they only have the word Fish
+                //i.e Fish vs Fish -4
+                notAFish = true;
             }
 
-            return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && category != SObject.junkCategory && !notAFish && parentSheetIndex != Constants.CATFISH;
+            Constants constants = new Constants();
+            return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && category != SObject.junkCategory && !notAFish /*&& parentSheetIndex != Constants.CATFISH*/;
         }
 
         private bool InAllSeasons(int parentSheetIndex)
@@ -185,6 +184,28 @@ namespace WhatAreYouMissing
                 }
             }
             return !foundInAllSeasons.Contains(false);
+        }
+
+        private bool NotInAllSeasons(int parentSheetIndex)
+        {
+            if (!Game1.objectInformation.ContainsKey(parentSheetIndex))
+            {
+                //A mod put the info into location data but it didn't edit fish data
+                //or object info so the mod it is meant to support doesn't exist
+                //on this machine
+                
+            }
+            List<FishInfo> fishInfo = new FishDisplayInfo(parentSheetIndex).GetFishInfoList();
+
+            foreach(FishInfo info in fishInfo)
+            {
+                if(info.GetSeasons().Count != 4)
+                {
+                    return true; 
+                }
+            }
+
+            return false;
         }
     }
 }

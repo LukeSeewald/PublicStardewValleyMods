@@ -92,6 +92,11 @@ namespace WhatAreYouMissing
             return DisplayInfo;
         }
 
+        public List<FishInfo> GetFishInfoList()
+        {
+            return FishInfoList;
+        }
+
         private string GetFishItemDisplayInfo()
         {
             Constants constants = new Constants();

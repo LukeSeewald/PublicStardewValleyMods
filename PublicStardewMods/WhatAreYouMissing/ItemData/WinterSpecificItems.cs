@@ -51,15 +51,15 @@ namespace WhatAreYouMissing
             //AddFish(Constants.HALIBUT);
 
             AddNormalSeasonalFish("winter");
-            if (Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
-            {
-                AddFish(Constants.CATFISH);
-            }
-            if (Config.ShowAllFishFromCurrentSeason || Utilities.IsWitchsSwampUnlocked())
-            {
-                //Don't need the weather check
-                AddOneCommonObject(Constants.CATFISH);
-            }
+            //if (Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
+            //{
+            //    AddFish(Constants.CATFISH);
+            //}
+            //if (Config.ShowAllFishFromCurrentSeason || Utilities.IsWitchsSwampUnlocked())
+            //{
+            //    //Don't need the weather check
+            //    AddOneCommonObject(Constants.CATFISH);
+            //}
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 6 && !Game1.player.fishCaught.ContainsKey(Constants.GLACIERFISH)))
             {
                 AddFish(Constants.GLACIERFISH);

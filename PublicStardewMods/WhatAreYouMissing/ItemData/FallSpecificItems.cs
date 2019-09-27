@@ -91,7 +91,7 @@ namespace WhatAreYouMissing
             AddNormalSeasonalFish("fall");
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 2 && !Game1.player.fishCaught.ContainsKey(Constants.ANGLER)))
             {
-                AddFish(Constants.CATFISH);
+                //AddFish(Constants.CATFISH);
                 AddFish(Constants.ANGLER);
             }
         }

@@ -104,15 +104,15 @@ namespace WhatAreYouMissing
             //AddFish(Constants.HALIBUT);
 
             AddNormalSeasonalFish("summer");
-            if(Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
-            {
-                AddFish(Constants.CATFISH);
-            }
-            if(Config.ShowAllFishFromCurrentSeason || Utilities.IsWitchsSwampUnlocked())
-            {
-                //Don't need the weather check
-                AddOneCommonObject(Constants.CATFISH);
-            }
+            //if(Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
+            //{
+            //    AddFish(Constants.CATFISH);
+            //}
+            //if(Config.ShowAllFishFromCurrentSeason || Utilities.IsWitchsSwampUnlocked())
+            //{
+            //    //Don't need the weather check
+            //    AddOneCommonObject(Constants.CATFISH);
+            //}
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 4 && !Game1.player.fishCaught.ContainsKey(Constants.CRIMSONFISH)))
             {
                 AddFish(Constants.CRIMSONFISH);
