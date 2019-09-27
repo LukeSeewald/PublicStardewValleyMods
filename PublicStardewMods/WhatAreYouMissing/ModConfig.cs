@@ -12,6 +12,7 @@ namespace WhatAreYouMissing
         public SButton button { get; set; }
         public bool ShowItemsFromLockedPlaces { get; set; }
         public bool ShowAllFishFromCurrentSeason { get; set; }
+        public bool AlwaysShowAllFish { get; set; }
         public bool ShowAllRecipes { get; set; }
         public bool AlwaysShowAllRecipes { get; set; }
         public int CommonAmount { get; set; }
@@ -22,6 +23,7 @@ namespace WhatAreYouMissing
             button = SButton.F2;
             ShowItemsFromLockedPlaces = true;
             ShowAllFishFromCurrentSeason = false;
+            AlwaysShowAllFish = false;
             ShowAllRecipes = false;
             AlwaysShowAllRecipes = false;
             CommonAmount = 5;

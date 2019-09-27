@@ -13,9 +13,8 @@ namespace WhatAreYouMissing
 {
     public class ModEntry : Mod
     {
-        private ModConfig modConfig;
         private SButton buttonToBringUpInterface;
-        public static ConfigOptions Config;
+        public static ModConfig modConfig;
         public static MissingItems MissingItems;
         public static RecipeIngredients RecipesIngredients;
         public static Logger Logger;
@@ -32,8 +31,6 @@ namespace WhatAreYouMissing
 
             modConfig = Helper.ReadConfig<ModConfig>();
             buttonToBringUpInterface = modConfig.button;
-            Config = new ConfigOptions(modConfig.button, modConfig.ShowItemsFromLockedPlaces, modConfig.ShowAllFishFromCurrentSeason, 
-                                        modConfig.ShowAllRecipes, modConfig.AlwaysShowAllRecipes, modConfig.CommonAmount, modConfig.HighestQualityAmount);
         }
 
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)

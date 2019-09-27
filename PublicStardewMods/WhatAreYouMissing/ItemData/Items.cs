@@ -11,7 +11,7 @@ namespace WhatAreYouMissing
     public abstract class Items
     {
         protected Dictionary<int, SObject> items;
-        protected ConfigOptions Config;
+        protected ModConfig Config;
         public enum FarmTypes
         {
             Normal = 0,
@@ -25,7 +25,7 @@ namespace WhatAreYouMissing
 
         public Items()
         {
-            Config = ModEntry.Config;
+            Config = ModEntry.modConfig;
             items = new Dictionary<int, SObject>();
             AddItems();
         }
@@ -113,18 +113,21 @@ namespace WhatAreYouMissing
 
             foreach (KeyValuePair<string, string> data in LocationData)
             {
-                string[] seasonalFish = data.Value.Split('/')[seasonIndex].Split(' ');
-                for(int i = 0; i < seasonalFish.Length; ++i)
+                if (!Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key))
                 {
-                    if(i % 2 == 0)
+                    string[] seasonalFish = data.Value.Split('/')[seasonIndex].Split(' ');
+                    for (int i = 0; i < seasonalFish.Length; ++i)
                     {
-                        //Its a parent sheet index
-                        int parentSheetIndex = int.Parse(seasonalFish[i]);
-                        
-                        //I want to add them manually, -1 means no fish at this location
-                        if (IsNormalFish(parentSheetIndex) && NotInAllSeasons(parentSheetIndex))
+                        if (i % 2 == 0)
                         {
-                            AddFish(parentSheetIndex);
+                            //Its a parent sheet index
+                            int parentSheetIndex = int.Parse(seasonalFish[i]);
+
+                            //I want to add them manually, -1 means no fish at this location
+                            if (IsNormalFish(parentSheetIndex) && NotInAllSeasons(parentSheetIndex))
+                            {
+                                AddFish(parentSheetIndex);
+                            }
                         }
                     }
                 }
@@ -137,7 +140,7 @@ namespace WhatAreYouMissing
 
             foreach (KeyValuePair<string, string> data in LocationData)
             {
-                for (int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter + 1; ++season)
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
                 {
                     string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
                     for (int i = 0; i < seasonalFish.Length; ++i)

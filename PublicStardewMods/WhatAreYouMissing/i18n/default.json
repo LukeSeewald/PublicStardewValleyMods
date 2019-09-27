@@ -54,6 +54,11 @@
   "GLACIERFISH_INFO": "At the bottom of the giant log in the Mountain Lake when its raining",
   "CRIMSONFISH_INFO": "Second Beach Pier",
   "ANGLER_INFO": "Fish upwards on the small bridge near JoJo Mart",
+  "MUTANT_CARP_INFO": "Fish in the Sewers (in the open room with Krobus)",
+
+  "STONEFISH_INFO": "Found in the Mines on floor 20",
+  "ICE_PIP_INFO": "Found in the Mines on floor 60",
+  "LAVA_EEL_INFO": "Found in the Mines on floor 100",
 
   "FARMING": "Farming",
   "FISHING": "Fishing",

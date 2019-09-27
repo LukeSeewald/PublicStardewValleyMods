@@ -260,12 +260,14 @@ namespace WhatAreYouMissing
         public const string GAME_NAME_WITCHS_SWAMP = "WitchSwamp";
 
         public const int MUTANT_CARP = 682;
-        //public const int GREEN_ALGAE = 153;
-        //public const int WHITE_ALGAE = 157;
-        //public const int SEAWEED = 152;
 
-        //public readonly ReadOnlyCollection<int> ALGAE_AND_SEAWEED = new ReadOnlyCollection<int>(
-        //                                        new List<int> { GREEN_ALGAE, WHITE_ALGAE, SEAWEED });
+        public const int STONEFISH = 158;
+        public const int ICE_PIP = 161;
+        public const int LAVA_EEL = 162;
+
+        public const int GREEN_ALGAE = 153;
+        public const int WHITE_ALGAE = 157;
+        public const int SEAWEED = 152;
 
         public readonly ReadOnlyDictionary<int, string> LEGNEDARY_FISH_INFO = new ReadOnlyDictionary<int, string>(
                                                 new Dictionary<int, string>()
@@ -273,11 +275,23 @@ namespace WhatAreYouMissing
                                                     [LEGEND] = Utilities.GetTranslation("LEGEND_INFO"),
                                                     [GLACIERFISH] = Utilities.GetTranslation("GLACIERFISH_INFO"),
                                                     [CRIMSONFISH] = Utilities.GetTranslation("CRIMSONFISH_INFO"),
-                                                    [ANGLER] = Utilities.GetTranslation("ANGLER_INFO")
+                                                    [ANGLER] = Utilities.GetTranslation("ANGLER_INFO"),
+                                                    [MUTANT_CARP] = Utilities.GetTranslation("MUTANT_CARP_INFO")
+                                                });
+
+        public readonly ReadOnlyDictionary<int, string> SPECIAL_MINE_FISH_INFO = new ReadOnlyDictionary<int, string>(
+                                                new Dictionary<int, string>()
+                                                {
+                                                    [STONEFISH] = Utilities.GetTranslation("STONEFISH_INFO"),
+                                                    [ICE_PIP] = Utilities.GetTranslation("ICE_PIP_INFO"),
+                                                    [LAVA_EEL] = Utilities.GetTranslation("LAVA_EEL_INFO")
                                                 });
 
         public readonly ReadOnlyCollection<int> LEGENDARY_FISH = new ReadOnlyCollection<int>(
                                                 new List<int> { LEGEND, GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });
+
+        public readonly ReadOnlyCollection<int> SPECIAL_MINE_FISH = new ReadOnlyCollection<int>(
+                                                new List<int> { STONEFISH, ICE_PIP, LAVA_EEL });
 
         public readonly ReadOnlyCollection<int> ITEMS_PLAYER_CAN_ONLY_HAVE_ONE_OF = new ReadOnlyCollection<int>(
                                                 new List<int> { GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });

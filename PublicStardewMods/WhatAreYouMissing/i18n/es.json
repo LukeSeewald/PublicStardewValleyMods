@@ -53,6 +53,11 @@
   "GLACIERFISH_INFO": "En el bosque Tizón, al cruzar los puentes (invierno)",
   "CRIMSONFISH_INFO": "En la parte de la playa que se desbloquea reparando el puente(verano)",
   "ANGLER_INFO": "Pescar hacia arriba en el pequeño puente cerca de JoJo Mart (otoño)",
+  "MUTANT_CARP_INFO": "",
+
+  "STONEFISH_INFO": "",
+  "ICE_PIP_INFO": "",
+  "LAVA_EEL_INFO": "",
 
   "FARMING": "Agricultura",
   "FISHING": "Pesca",

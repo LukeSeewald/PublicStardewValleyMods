@@ -304,7 +304,7 @@ namespace WhatAreYouMissing
             foreach(KeyValuePair<int, SObject> pair in AvailableRecipes)
             {
                 int commonQualityAmountMissing = HowManyMissingCommonQuality(new SObject(pair.Key, 1, quality: Constants.COMMON_QUALITY));
-                if(commonQualityAmountMissing != 0 || ModEntry.Config.AlwaysShowAllRecipes)
+                if(commonQualityAmountMissing != 0 || ModEntry.modConfig.AlwaysShowAllRecipes)
                 {
                     MissingRecipes.Add(new SObject(pair.Key, commonQualityAmountMissing == 0 ? 1 : commonQualityAmountMissing));
                 }
@@ -345,9 +345,9 @@ namespace WhatAreYouMissing
                 int maxQuality = highestQuality.GetHighestQualityForItem(pair.Key);
                 int highestQualityAmountMissing = HowManyMissingHighestQuality(new SObject(pair.Key, 1, quality: maxQuality));
 
-                if (commonQualityAmountMissing != 0)
+                if (commonQualityAmountMissing != 0 || ModEntry.modConfig.AlwaysShowAllFish)
                 {
-                    MissingFish.Add(new SObject(pair.Key, commonQualityAmountMissing));
+                    MissingFish.Add(new SObject(pair.Key, commonQualityAmountMissing == 0 ? 1 : commonQualityAmountMissing));
                 }
                 if (highestQualityAmountMissing != 0)
                 {
@@ -384,10 +384,10 @@ namespace WhatAreYouMissing
             }
             if (IsQualityItemInPlayerItems(item))
             {
-                int amountMissing = ModEntry.Config.CommonQualityAmount - CondensedPlayerItems[item.ParentSheetIndex][Constants.COMMON_QUALITY].Stack;
+                int amountMissing = ModEntry.modConfig.CommonAmount - CondensedPlayerItems[item.ParentSheetIndex][Constants.COMMON_QUALITY].Stack;
                 return amountMissing < 0 ? 0 : amountMissing;
             }
-            return ModEntry.Config.CommonQualityAmount;
+            return ModEntry.modConfig.CommonAmount;
         }
 
         private int HowManyMissingHighestQuality(SObject item)
@@ -398,10 +398,10 @@ namespace WhatAreYouMissing
             }
             if (IsQualityItemInPlayerItems(item))
             {
-                int amountMissing = ModEntry.Config.HighestQualityAmount - CondensedPlayerItems[item.ParentSheetIndex][item.Quality].Stack;
+                int amountMissing = ModEntry.modConfig.HighestQualityAmount - CondensedPlayerItems[item.ParentSheetIndex][item.Quality].Stack;
                 return amountMissing < 0 ? 0 : amountMissing;
             }
-            return ModEntry.Config.HighestQualityAmount;
+            return ModEntry.modConfig.HighestQualityAmount;
         }
 
         private bool IsQualityItemInPlayerItems(SObject item)

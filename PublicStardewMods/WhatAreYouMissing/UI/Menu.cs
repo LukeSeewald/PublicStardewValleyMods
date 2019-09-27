@@ -45,15 +45,12 @@ namespace WhatAreYouMissing
         private string HoverText;
         public static bool ForcePreventClose;
 
-        private ConfigOptions Config;
-
         private List<ClickableComponent> tabs;
         private List<MenuTab> pages;
         private List<int> tabIconParentSheetIndices;
 
         public Menu() : base(Game1.viewport.Width / 2 - (800 + borderWidth * 2) / 2, Game1.viewport.Height / 2 - (600 + borderWidth * 2) / 2, 800 + borderWidth * 2, 600 + borderWidth * 2, true)
         {
-            Config = ModEntry.Config;
             tabs = new List<ClickableComponent>();
             pages = new List<MenuTab>();
             tabIconParentSheetIndices = new List<int>();
@@ -183,16 +180,20 @@ namespace WhatAreYouMissing
                         b.End();
                     }
                     b.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-                    if (!HoverText.Equals(""))
-                    {
-                        Utilities.DrawHoverTextBox(b, HoverText, 4);
-                    }
                 }
             }
             else
+            {
                 pages[CurrentTab].draw(b);
+            }
             if (!ForcePreventClose)
+            {
                 base.draw(b);
+                if (!HoverText.Equals(""))
+                {
+                    Utilities.DrawHoverTextBox(b, HoverText, 4);
+                }
+            }
             if (Game1.options.hardwareCursor)
                 return;
             b.Draw(Game1.mouseCursors, new Vector2(Game1.getOldMouseX(), Game1.getOldMouseY()), new Rectangle?(Game1.getSourceRectForStandardTileSheet(Game1.mouseCursors, Game1.options.gamepadControls ? 44 : 0, 16, 16)), Color.White, 0.0f, Vector2.Zero, Game1.pixelZoom + Game1.dialogueButtonScale / 150f, SpriteEffects.None, 1f);

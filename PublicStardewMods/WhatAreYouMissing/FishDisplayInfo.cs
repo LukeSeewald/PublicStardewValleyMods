@@ -109,6 +109,10 @@ namespace WhatAreYouMissing
             {
                 return Utilities.GetTranslation("NIGHT_MARKET");
             }
+            else if (constants.SPECIAL_MINE_FISH_INFO.ContainsKey(ParentSheetIndex))
+            {
+                return constants.SPECIAL_MINE_FISH_INFO[ParentSheetIndex];
+            }
             else if (IsFromACrabPot())
             {
                 return GetCrabPotDisplayInfo();

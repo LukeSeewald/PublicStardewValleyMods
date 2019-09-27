@@ -12,29 +12,6 @@ using StardewValley.Menus;
 
 namespace WhatAreYouMissing
 {
-    public struct ConfigOptions
-    {
-        public SButton Button { get; }
-        public bool ShowItemsFromLockedPlaces { get; }
-        public bool ShowAllFishFromCurrentSeason { get; }
-        public bool ShowAllRecipes { get; }
-        public bool AlwaysShowAllRecipes { get; }
-        public int CommonQualityAmount { get; }
-        public int HighestQualityAmount { get; }
-
-        public ConfigOptions(SButton button, bool showLockedItems, bool showAllFishFromCurrentSeason, 
-                                bool showAllRecipes, bool alwaysShowAllRecipes, int commonAmount, int highestQualityAmount)
-        {
-            Button = button;
-            ShowItemsFromLockedPlaces = showLockedItems;
-            ShowAllFishFromCurrentSeason = showAllFishFromCurrentSeason;
-            ShowAllRecipes = showAllRecipes;
-            AlwaysShowAllRecipes = alwaysShowAllRecipes;
-            CommonQualityAmount = commonAmount;
-            HighestQualityAmount = highestQualityAmount;
-        }
-    };
-
     public class Utilities
     {
         public static bool IsDesertUnlocked()
@@ -209,13 +186,27 @@ namespace WhatAreYouMissing
             boxDimensions.Y += 32 + (lines.Length - 1) * spaceBetweenLines + 4;
             boxDimensions.X += 32;
 
-            if(IsGoingOutOfXView((int)position.X, (int)boxDimensions.X))
+            if(IsGoingOutOfXRightView((int)position.X, (int)boxDimensions.X))
             {
-                position.X = Game1.viewport.Width - boxDimensions.X;
+                if (IsGoingOutOfXLeftView((int)position.X, (int)boxDimensions.X))
+                {
+                    position.X = GetBestX((int)position.X, (int)boxDimensions.X);
+                }
+                else
+                {
+                    position.X = Game1.viewport.Width - boxDimensions.X;
+                }
             }
-            if(IsGoingOutOfYView((int)position.Y, (int)boxDimensions.Y))
+            if(IsGoingOutOfYDownView((int)position.Y, (int)boxDimensions.Y))
             {
-                position.Y = Game1.getOldMouseY() - boxDimensions.Y;
+                if(IsGoingOutOfYUpView((int)position.Y, (int)boxDimensions.Y))
+                {
+                    position.Y = GetBestY((int)position.Y, (int)boxDimensions.Y);
+                }
+                else
+                {
+                    position.Y = Game1.getOldMouseY() - boxDimensions.Y;
+                }
             }
 
             IClickableMenu.drawTextureBox(b, Game1.menuTexture, new Rectangle(0, 256, 60, 60), (int)position.X, (int)position.Y, (int)boxDimensions.X, (int)boxDimensions.Y, Color.White);
@@ -229,14 +220,40 @@ namespace WhatAreYouMissing
             }
         }
 
-        private static bool IsGoingOutOfXView(int x, int width)
+        private static int GetBestX(int x, int width)
+        {
+            int overRight = Math.Abs(x + width - Game1.viewport.Width);
+            int overLeft = Math.Abs(x - (Game1.viewport.Width - width));
+
+            return overRight > overLeft ? x - width : x;
+        }
+
+        private static int GetBestY(int y, int height)
+        {
+            int overDown = Math.Abs(y + height - Game1.viewport.Height);
+            int overUp = Math.Abs(y - (Game1.viewport.Height - height));
+
+            return overDown > overUp ? Game1.getOldMouseY() - height : y;
+        }
+
+        private static bool IsGoingOutOfXRightView(int x, int width)
         {
             return x + width > Game1.viewport.Width;
         }
 
-        private static bool IsGoingOutOfYView(int y, int height)
+        private static bool IsGoingOutOfXLeftView(int x, int width)
+        {
+            return x - width < 0;
+        }
+
+        private static bool IsGoingOutOfYDownView(int y, int height)
         {
             return y + height > Game1.viewport.Height;
+        }
+
+        private static bool IsGoingOutOfYUpView(int y, int height)
+        {
+            return y - height < 0;
         }
 
         public static string GetTranslation(string key)
