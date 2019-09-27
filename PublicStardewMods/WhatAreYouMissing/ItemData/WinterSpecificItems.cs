@@ -50,7 +50,7 @@ namespace WhatAreYouMissing
             //AddFish(Constants.RED_SNAPPER);
             //AddFish(Constants.HALIBUT);
 
-            AddNormalSeasonalFish();
+            AddNormalSeasonalFish("winter");
             if (Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
             {
                 AddFish(Constants.CATFISH);

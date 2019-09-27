@@ -103,7 +103,7 @@ namespace WhatAreYouMissing
             //AddFish(Constants.SHAD);
             //AddFish(Constants.HALIBUT);
 
-            AddNormalSeasonalFish();
+            AddNormalSeasonalFish("summer");
             if(Config.ShowAllFishFromCurrentSeason || Utilities.IsSecretWoodsUnlocked())
             {
                 AddFish(Constants.CATFISH);

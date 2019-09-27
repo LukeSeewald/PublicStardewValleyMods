@@ -31,7 +31,7 @@ namespace WhatAreYouMissing
             {
                 return new string[1] { "" };
             }
-            return new string[1] { gameName };
+            return new string[1] { gameName + " Area " + areaCode };
         }
 
         private void AddDisplayNames()

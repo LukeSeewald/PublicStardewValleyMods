@@ -65,7 +65,7 @@ namespace WhatAreYouMissing
             //AddFish(Constants.SARDINE);
             //AddFish(Constants.HALIBUT);
             //The Legend requires level 10 fishing
-            AddNormalSeasonalFish();
+            AddNormalSeasonalFish("spring");
             if (Config.ShowAllFishFromCurrentSeason || Game1.player.getEffectiveSkillLevel(1) == 10)
             {
                 AddFish(Constants.CATFISH);

@@ -113,10 +113,10 @@ namespace WhatAreYouMissing
             }
         }
 
-        protected void AddNormalSeasonalFish()
+        protected void AddNormalSeasonalFish(string season)
         {
             Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
-            int seasonIndex = SeasonNameToIndex(Game1.currentSeason);
+            int seasonIndex = SeasonNameToIndex(season);
 
             foreach (KeyValuePair<string, string> data in LocationData)
             {
