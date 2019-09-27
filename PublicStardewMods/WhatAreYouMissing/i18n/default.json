@@ -10,11 +10,10 @@
   "SEASON_SPECIFIC_DESCRIPTION": "Missing items specific to this season",
   "SEASON_SPECIFIC_CC_DESCRIPTION": "Missing Community Center items specific to this season",
   "COMMON_CC_DESCRIPTION": "Missing Community Center items common to all seasons",
-  "SPECIFIC_MERCHANT_DESCRIPTION": "Missing Specific Season items that are available from the Travelling Cart",
+  "SPECIFIC_MERCHANT_DESCRIPTION": "Missing seasonal items that are available from the Travelling Cart",
   "CCMERCHANT_DESCRIPTION": "Missing Community Center items that are available from the Travelling Cart",
   "COOKED_ITEMS_DESCRIPTION": "Missing cooked items that you know how to make",
   "FISH_TAB_DESCRIPTION": "All of the Fish that can be obtained",
-
 
   "EMPTY_LIST_MESSAGE": "There is nothing you are missing that is available",
 
