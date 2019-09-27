@@ -33,13 +33,6 @@ namespace WhatAreYouMissing
         protected void AddFish(int parentSheetIndex)
         {
             Dictionary<int, string> data = Game1.content.Load<Dictionary<int, string>>("Data\\Fish");
-            if (!data.ContainsKey(parentSheetIndex))
-            {
-                //Some mods may have fish in locations without conditions but only
-                //add the fish data to fish xnb based on conditions
-                //so it could be missing
-                return;
-            }
             switch (data[parentSheetIndex].Split('/')[7])
             {
                 case "sunny":
@@ -138,7 +131,41 @@ namespace WhatAreYouMissing
             }
         }
 
+        protected void AddAllFish()
+        {
+            Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
+
+            foreach (KeyValuePair<string, string> data in LocationData)
+            {
+                for (int season = (int)SeasonIndex.Spring; season < (int)SeasonIndex.Winter + 1; ++season)
+                {
+                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
+                    for (int i = 0; i < seasonalFish.Length; ++i)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            //Its a parent sheet index
+                            int parentSheetIndex = int.Parse(seasonalFish[i]);
+
+                            //I want to add them manually, -1 means no fish at this location
+                            if (IsAFish(parentSheetIndex))
+                            {
+                                AddOneCommonObject(parentSheetIndex);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private bool IsNormalFish(int parentSheetIndex)
+        {
+            bool isAFish = IsAFish(parentSheetIndex);
+            Constants constants = new Constants();
+            return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && isAFish;
+        }
+
+        private bool IsAFish(int parentSheetIndex)
         {
             //Sometimes a mod can put the info into location data but not edit fish data
             //or object info so the mod it is meant to support doesn't exist
@@ -149,7 +176,7 @@ namespace WhatAreYouMissing
             }
 
             int category = -1;
-            bool notAFish = false;
+            bool isAFish = true;
 
             string[] typeAndCategory = Game1.objectInformation[parentSheetIndex].Split('/')[3].Split(' ');
             if (typeAndCategory.Length > 1)
@@ -161,40 +188,14 @@ namespace WhatAreYouMissing
                 //Things like Algae don't have the category -4 (fish category)
                 //they only have the word Fish
                 //i.e Fish vs Fish -4
-                notAFish = true;
+                isAFish = false;
             }
 
-            Constants constants = new Constants();
-            return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && category != SObject.junkCategory && !notAFish /*&& parentSheetIndex != Constants.CATFISH*/;
-        }
-
-        private bool InAllSeasons(int parentSheetIndex)
-        {
-            bool[] foundInAllSeasons = new bool[4] { false, false, false, false};
-            Dictionary<string, string> locationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
-            foreach (KeyValuePair<string, string> data in locationData)
-            {
-                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
-                {
-                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
-                    if (seasonalFish.Contains(parentSheetIndex.ToString()))
-                    {
-                        foundInAllSeasons[season - (int)SeasonIndex.Spring] = true;
-                    }
-                }
-            }
-            return !foundInAllSeasons.Contains(false);
+            return isAFish && category != SObject.junkCategory;
         }
 
         private bool NotInAllSeasons(int parentSheetIndex)
         {
-            if (!Game1.objectInformation.ContainsKey(parentSheetIndex))
-            {
-                //A mod put the info into location data but it didn't edit fish data
-                //or object info so the mod it is meant to support doesn't exist
-                //on this machine
-                
-            }
             List<FishInfo> fishInfo = new FishDisplayInfo(parentSheetIndex).GetFishInfoList();
 
             foreach(FishInfo info in fishInfo)

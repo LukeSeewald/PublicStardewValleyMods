@@ -19,7 +19,8 @@ namespace WhatAreYouMissing
         SpecificCCSeasonTab = 1,
         CommonCCTab = 2,
         MerchantTab = 3,
-        CookedItemsTab = 4
+        CookedItemsTab = 4,
+        FishTab = 5
 
     }
     public class Menu : IClickableMenu
@@ -34,9 +35,10 @@ namespace WhatAreYouMissing
         public const int REGION_CC_COMMON_TAB = 16432;
         public const int REGION_MERCHANT_TAB = 16433;
         public const int REGION_RECIPES_TAB = 16434;
+        public const int REGION_FISH_TAB = 16434;
 
 
-        public const int NUM_TABS = 5;
+        public const int NUM_TABS = 6;
 
         public int CurrentTab;
         private bool invisible;
@@ -101,6 +103,7 @@ namespace WhatAreYouMissing
             {
                 myID = 16433,
                 downNeighborID = 3,
+                rightNeighborID = 16434,
                 leftNeighborID = 16432,
                 tryDefaultIfNoDownNeighborExists = true,
                 fullyImmutable = true
@@ -110,11 +113,22 @@ namespace WhatAreYouMissing
             tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CookedItemsTab)), TabName.CookedItemsTab.ToString(), Utilities.GetTranslation("COOKED_ITEMS_DESCRIPTION"))
             {
                 myID = 16434,
+                downNeighborID = 4,
+                rightNeighborID = 16435,
                 leftNeighborID = 16433,
                 tryDefaultIfNoDownNeighborExists = true,
                 fullyImmutable = true
             });
             tabIconParentSheetIndices.Add(Constants.SPICY_EEL);
+
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.FishTab)), TabName.FishTab.ToString(), Utilities.GetTranslation("FISH_TAB_DESCRIPTION"))
+            {
+                myID = 16435,
+                leftNeighborID = 16434,
+                tryDefaultIfNoDownNeighborExists = true,
+                fullyImmutable = true
+            });
+            tabIconParentSheetIndices.Add(Constants.CATFISH);
         }
 
         private Rectangle MakeTabRectangle(int tabPosistion)
@@ -133,6 +147,8 @@ namespace WhatAreYouMissing
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.MerchantTab, allMissingMerchantItems ));
 
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CookedItemsTab, ModEntry.MissingItems.GetMissingRecipes()));
+
+            pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.FishTab, ModEntry.MissingItems.GetMissingFish()));
         }
 
         public override void draw(SpriteBatch b)

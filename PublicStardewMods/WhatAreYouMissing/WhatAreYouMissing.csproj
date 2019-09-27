@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FishDisplayInfo.cs" />
+    <Compile Include="ItemData\AllFish.cs" />
     <Compile Include="ItemData\CommonCCItems.cs" />
     <Compile Include="ItemData\Recipes.cs" />
     <Compile Include="Utility\Constants.cs" />

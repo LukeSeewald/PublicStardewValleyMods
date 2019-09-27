@@ -32,6 +32,7 @@ namespace WhatAreYouMissing
         private Dictionary<int, SObject> AvailableMerchentStock;
         private Dictionary<int, SObject> AvailableRecipes;
         private Dictionary<int , Dictionary<int, SObject>> AllRecipeIngredients;
+        private Dictionary<int, SObject> AllFish;
         private Dictionary<int, Dictionary<int, SObject>> CondensedPlayerItems;
         private Dictionary<int, bool[]> CompletedItems;
         private Dictionary<int, SObject> CurrentSeasonSpecifics;
@@ -44,6 +45,7 @@ namespace WhatAreYouMissing
         private List<SObject> MissingSpecifics;
         private List<SObject> MissingRecipes;
         private Dictionary<int, Dictionary<int, SObject>> MissingRecipeIngredients;
+        private List<SObject> MissingFish;
 
         public MissingItems()
         {
@@ -64,6 +66,7 @@ namespace WhatAreYouMissing
             AvailableMerchentStock = new AvailableMerchantStock(SpringItems, SummerItems, FallItems, WinterItems, CCItems).GetItems();
             AvailableRecipes = new Recipes().GetItems();
             AllRecipeIngredients = new RecipeIngredients().GetRecipeAndIngredients();
+            AllFish = new AllFish().GetItems();
             CurrentSeasonSpecifics = GetCurrentSeasonSpecifics();
 
             CompletedItems = new CommunityCenter().bundlesDict();
@@ -78,6 +81,7 @@ namespace WhatAreYouMissing
             MissingMerchantCCItems = new List<SObject>();
             MissingRecipes = new List<SObject>();
             MissingRecipeIngredients = new Dictionary<int, Dictionary<int, SObject>>();
+            MissingFish = new List<SObject>();
         }
 
         private void InitializePlayerItems()
@@ -93,6 +97,7 @@ namespace WhatAreYouMissing
             FindMissingMerchantSpecifics();
             FindMissingRecipes();
             FindMissingRecipeIngredients();
+            FindMissingFish();
         }
 
         private Dictionary<int, SObject> GetCurrentSeasonSpecifics()
@@ -149,6 +154,11 @@ namespace WhatAreYouMissing
         public Dictionary<int, Dictionary<int, SObject>> GetMissingRecipeIngredients()
         {
             return MissingRecipeIngredients;
+        }
+
+        public List<SObject> GetMissingFish()
+        {
+            return MissingFish;
         }
 
         private void FindMissingCCItems()
@@ -321,6 +331,27 @@ namespace WhatAreYouMissing
                             MissingRecipeIngredients.Add(recipeAndIngredients.Key, missingIngredient);
                         }
                     }
+                }
+            }
+        }
+
+        private void FindMissingFish()
+        {
+            HighestQuality highestQuality = new HighestQuality();
+            foreach (KeyValuePair<int, SObject> pair in AllFish)
+            {
+                int commonQualityAmountMissing = HowManyMissingCommonQuality(new SObject(pair.Key, 1, quality: Constants.COMMON_QUALITY));
+
+                int maxQuality = highestQuality.GetHighestQualityForItem(pair.Key);
+                int highestQualityAmountMissing = HowManyMissingHighestQuality(new SObject(pair.Key, 1, quality: maxQuality));
+
+                if (commonQualityAmountMissing != 0)
+                {
+                    MissingFish.Add(new SObject(pair.Key, commonQualityAmountMissing));
+                }
+                if (highestQualityAmountMissing != 0)
+                {
+                    MissingFish.Add(new SObject(pair.Key, highestQualityAmountMissing, quality: maxQuality));
                 }
             }
         }

@@ -4,12 +4,14 @@
   "COMMON_CC_HEADER": "Objetos comunes del Centro cívico",
   "MERCHANT_HEADER": "Objetos del carro ambulante",
   "COOKED_ITEMS_HEADER": "Recetas",
+  "FISH_TAB_HEADER": "",
 
   "SEASON_SPECIFIC_DESCRIPTION": "Objetos específicos que te faltan de la estación actual",
   "SEASON_SPECIFIC_CC_DESCRIPTION": "Objetos específicos de la estación actual que te faltan del centro cívico",
   "COMMON_CC_DESCRIPTION": "Objetos comunes a todas las estaciones que te faltan del centro cívico",
   "MERCHANT_DESCRIPTION": "Objetos raros que te faltan y están disponibles en el carro ambulante",
   "COOKED_ITEMS_DESCRIPTION": "Las recetas que sabes hacer pero que te faltan",
+  "FISH_TAB_DESCRIPTION": "",
 
   "EMPTY_LIST_MESSAGE": "No te falta nada de lo que está disponible",
 
