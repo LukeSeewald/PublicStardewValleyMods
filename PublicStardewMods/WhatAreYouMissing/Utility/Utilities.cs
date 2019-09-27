@@ -188,14 +188,7 @@ namespace WhatAreYouMissing
 
             if(IsGoingOutOfXRightView((int)position.X, (int)boxDimensions.X))
             {
-                if (IsGoingOutOfXLeftView((int)position.X, (int)boxDimensions.X))
-                {
-                    position.X = GetBestX((int)position.X, (int)boxDimensions.X);
-                }
-                else
-                {
-                    position.X = Game1.viewport.Width - boxDimensions.X;
-                }
+                position.X = Game1.viewport.Width - boxDimensions.X;
             }
             if(IsGoingOutOfYDownView((int)position.Y, (int)boxDimensions.Y))
             {
@@ -220,14 +213,6 @@ namespace WhatAreYouMissing
             }
         }
 
-        private static int GetBestX(int x, int width)
-        {
-            int overRight = Math.Abs(x + width - Game1.viewport.Width);
-            int overLeft = Math.Abs(x - (Game1.viewport.Width - width));
-
-            return overRight > overLeft ? x - width : x;
-        }
-
         private static int GetBestY(int y, int height)
         {
             int overDown = Math.Abs(y + height - Game1.viewport.Height);
@@ -239,11 +224,6 @@ namespace WhatAreYouMissing
         private static bool IsGoingOutOfXRightView(int x, int width)
         {
             return x + width > Game1.viewport.Width;
-        }
-
-        private static bool IsGoingOutOfXLeftView(int x, int width)
-        {
-            return x - width < 0;
         }
 
         private static bool IsGoingOutOfYDownView(int y, int height)
