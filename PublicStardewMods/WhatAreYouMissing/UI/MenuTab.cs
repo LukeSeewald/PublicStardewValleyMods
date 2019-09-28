@@ -299,6 +299,8 @@ namespace WhatAreYouMissing
                     return Utilities.GetTranslation("COOKED_ITEMS_HEADER");
                 case TabName.FishTab:
                     return Utilities.GetTranslation("FISH_TAB_HEADER");
+                case TabName.CropsTabs:
+                    return Utilities.GetTranslation("CROPS_TAB_HEADER");
                 default:
                     //Should never get here
                     return "Oopsies";

@@ -21,27 +21,12 @@ namespace WhatAreYouMissing
         {
             AddCrops();
             AddForagables();
-            //AddFruitTrees();
             AddFruitTrees("summer");
             AddFish();
         }
 
         private void AddCrops()
         {
-            //AddCrop(Constants.MELON);
-            //AddCrop(Constants.POPPY);
-            //AddCrop(Constants.RADISH);
-            //AddCrop(Constants.SUMMER_SPANGLE);
-            //AddCrop(Constants.SUNFLOWER);
-            //AddCrop(Constants.WHEAT);
-            //AddCrop(Constants.BLUEBERRY);
-            //AddCrop(Constants.CORN);
-            //AddCrop(Constants.HOPS);
-            //AddCrop(Constants.HOT_PEPPER);
-            //AddCrop(Constants.TOMATO);
-            ////coffee beans can only come from travelling cart or mines
-            //AddCrop(Constants.COFFEE_BEAN);
-
             AddCrops("summer");
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.RED_CABBAGE))
@@ -80,12 +65,6 @@ namespace WhatAreYouMissing
             {
                 AddOneCommonObject(Constants.FIDDLEHEAD_FERN);
             }
-        }
-
-        private void AddFruitTrees()
-        {
-            //AddOneCommonObject(Constants.APPLE);
-            //AddOneCommonObject(Constants.POMEGRANATE);
         }
 
         private void AddFish()

@@ -63,25 +63,8 @@ namespace WhatAreYouMissing
             }
         }
 
-        private void AddFruitTrees()
-        {
-            //AddOneCommonObject(Constants.CHEERY);
-            //AddOneCommonObject(Constants.APRICOT);
-        }
-
         private void AddCrops()
         {
-            //AddCrop(Constants.BLUE_JAZZ);
-            //AddCrop(Constants.CAULIFLOWER);
-            //AddCrop(Constants.KALE);
-            //AddCrop(Constants.PARSNIP);
-            //AddCrop(Constants.POTATO);
-            //AddCrop(Constants.TULIP);
-            //AddCrop(Constants.GREEN_BEAN);
-            ////The coffee bean can be purchased from the travelling merchant or found 
-            ////in the mines so I'll leave it due to mines and the fact it can grow in summer
-            //AddCrop(Constants.COFFEE_BEAN);
-
             AddCrops("spring");
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.GARLIC))

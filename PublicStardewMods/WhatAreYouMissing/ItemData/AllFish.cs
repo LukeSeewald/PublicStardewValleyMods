@@ -7,7 +7,7 @@ using SObject = StardewValley.Object;
 
 namespace WhatAreYouMissing
 {
-    public class AllFish : Items
+    public class AllFish : Items, ISpecificItems
     {
         public AllFish() : base() { }
 

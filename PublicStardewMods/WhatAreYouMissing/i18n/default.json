@@ -6,6 +6,7 @@
   "CCMERCHANT_HEADER": "CC Travelling Cart Items",
   "COOKED_ITEMS_HEADER": "Cooked Items",
   "FISH_TAB_HEADER": "All Fish",
+  "CROPS_TAB_HEADER": "All Crops",
 
   "SEASON_SPECIFIC_DESCRIPTION": "Missing items specific to this season",
   "SEASON_SPECIFIC_CC_DESCRIPTION": "Missing Community Center items specific to this season",
@@ -13,7 +14,8 @@
   "SPECIFIC_MERCHANT_DESCRIPTION": "Missing seasonal items that are available from the Travelling Cart",
   "CCMERCHANT_DESCRIPTION": "Missing Community Center items that are available from the Travelling Cart",
   "COOKED_ITEMS_DESCRIPTION": "Missing cooked items that you know how to make",
-  "FISH_TAB_DESCRIPTION": "All of the Fish that can be obtained",
+  "FISH_TAB_DESCRIPTION": "All of the fish that can be obtained",
+  "CROPS_TAB_DESCRIPTION": "All of the crops from all of the seasons (even if you haven't unlocked the seeds yet)",
 
   "EMPTY_LIST_MESSAGE": "There is nothing you are missing that is available",
 

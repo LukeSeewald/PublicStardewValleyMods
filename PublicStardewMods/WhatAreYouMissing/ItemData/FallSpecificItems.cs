@@ -27,19 +27,6 @@ namespace WhatAreYouMissing
 
         private void AddCrops()
         {
-            //AddCrop(Constants.AMARANTH);
-            //AddCrop(Constants.BOK_CHOY);
-            //AddCrop(Constants.FAIRY_ROSE);
-            //AddCrop(Constants.PUMPKIN);
-            //AddCrop(Constants.SUNFLOWER);
-            //AddCrop(Constants.SWEET_GEM_BERRY);
-            //AddCrop(Constants.WHEAT);
-            //AddCrop(Constants.YAM);
-            //AddCrop(Constants.CORN);
-            //AddCrop(Constants.CRANBERRIES);
-            //AddCrop(Constants.EGGPLANT);
-            //AddCrop(Constants.GRAPE);
-
             AddCrops("fall");
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.ARTICHOKE))
@@ -79,7 +66,6 @@ namespace WhatAreYouMissing
             AddNormalSeasonalFish("fall");
             if (Config.ShowAllFishFromCurrentSeason || (Game1.player.getEffectiveSkillLevel(1) > 2 && !Game1.player.fishCaught.ContainsKey(Constants.ANGLER)))
             {
-                //AddFish(Constants.CATFISH);
                 AddFish(Constants.ANGLER);
             }
         }

@@ -305,6 +305,10 @@ namespace WhatAreYouMissing
                                                                 RED_CABBAGE_SEEDS, STARFRUIT_SEEDS, ARTICHOKE_SEEDS,
                                                                 BEET_SEEDS});
 
+        public readonly ReadOnlyCollection<int> RANDOM_SEASON_SEEDS = new ReadOnlyCollection<int>(
+                                                new List<int> { SPRING_SEEDS, SUMMER_SEEDS, FALL_SEEDS,
+                                                                WINTER_SEEDS });
+
         public readonly ReadOnlyCollection<int> ITEMS_PLAYER_CAN_ONLY_HAVE_ONE_OF = new ReadOnlyCollection<int>(
                                                 new List<int> { GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });
 

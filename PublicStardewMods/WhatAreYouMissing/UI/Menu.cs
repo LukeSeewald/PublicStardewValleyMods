@@ -21,7 +21,8 @@ namespace WhatAreYouMissing
         SpecificMerchantTab = 3,
         CCMerchantTab = 4,
         CookedItemsTab = 5,
-        FishTab = 6
+        FishTab = 6,
+        CropsTabs = 7
 
     }
     public class Menu : IClickableMenu
@@ -38,9 +39,11 @@ namespace WhatAreYouMissing
         public const int REGION_CCMERCHANT_TAB = 16434;
         public const int REGION_RECIPES_TAB = 16435;
         public const int REGION_FISH_TAB = 16436;
+        public const int REGION_CROPS_TAB = 16437;
 
 
-        public const int NUM_TABS = 7;
+
+        public const int NUM_TABS = 8;
 
         public int CurrentTab;
         private bool invisible;
@@ -134,11 +137,22 @@ namespace WhatAreYouMissing
             tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.FishTab)), TabName.FishTab.ToString(), Utilities.GetTranslation("FISH_TAB_DESCRIPTION"))
             {
                 myID = 16436,
+                downNeighborID = 6,
+                rightNeighborID = 16437,
                 leftNeighborID = 16435,
                 tryDefaultIfNoDownNeighborExists = true,
                 fullyImmutable = true
             });
             tabIconParentSheetIndices.Add(Constants.CATFISH);
+
+            tabs.Add(new ClickableComponent(MakeTabRectangle(GetTabPosition(TabName.CropsTabs)), TabName.CropsTabs.ToString(), Utilities.GetTranslation("CROPS_TAB_DESCRIPTION"))
+            {
+                myID = 16437,
+                leftNeighborID = 16436,
+                tryDefaultIfNoDownNeighborExists = true,
+                fullyImmutable = true
+            });
+            tabIconParentSheetIndices.Add(Constants.ANCIENT_FRUIT);
         }
 
         private Rectangle MakeTabRectangle(int tabPosistion)
@@ -155,6 +169,7 @@ namespace WhatAreYouMissing
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.SpecificMerchantTab, ModEntry.MissingItems.GetMissingMerchantItems()));
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CookedItemsTab, ModEntry.MissingItems.GetMissingRecipes()));
             pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.FishTab, ModEntry.MissingItems.GetMissingFish()));
+            pages.Add(new MenuTab(xPositionOnScreen, yPositionOnScreen, width, height, TabName.CropsTabs, ModEntry.MissingItems.GetMissingCrops()));
         }
 
         public override void draw(SpriteBatch b)
