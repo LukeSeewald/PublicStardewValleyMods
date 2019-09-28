@@ -20,24 +20,27 @@ namespace WhatAreYouMissing
         protected override void AddItems()
         {
             AddCrops();
+            AddFruitTrees("fall");
             AddForagables();
             AddFish();
         }
 
         private void AddCrops()
         {
-            AddCrop(Constants.AMARANTH);
-            AddCrop(Constants.BOK_CHOY);
-            AddCrop(Constants.FAIRY_ROSE);
-            AddCrop(Constants.PUMPKIN);
-            AddCrop(Constants.SUNFLOWER);
-            AddCrop(Constants.SWEET_GEM_BERRY);
-            AddCrop(Constants.WHEAT);
-            AddCrop(Constants.YAM);
-            AddCrop(Constants.CORN);
-            AddCrop(Constants.CRANBERRIES);
-            AddCrop(Constants.EGGPLANT);
-            AddCrop(Constants.GRAPE);
+            //AddCrop(Constants.AMARANTH);
+            //AddCrop(Constants.BOK_CHOY);
+            //AddCrop(Constants.FAIRY_ROSE);
+            //AddCrop(Constants.PUMPKIN);
+            //AddCrop(Constants.SUNFLOWER);
+            //AddCrop(Constants.SWEET_GEM_BERRY);
+            //AddCrop(Constants.WHEAT);
+            //AddCrop(Constants.YAM);
+            //AddCrop(Constants.CORN);
+            //AddCrop(Constants.CRANBERRIES);
+            //AddCrop(Constants.EGGPLANT);
+            //AddCrop(Constants.GRAPE);
+
+            AddCrops("fall");
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.ARTICHOKE))
             {
@@ -45,7 +48,7 @@ namespace WhatAreYouMissing
             }
             else if (Game1.year > 1 || Utilities.IsMerchantAvailiableAndHasItem(Constants.ARTICHOKE_SEEDS))
             {
-                AddCrop(Constants.ARTICHOKE);
+                ManuallyAddCrop(Constants.ARTICHOKE);
             }
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.BEET))
@@ -54,7 +57,7 @@ namespace WhatAreYouMissing
             }
             if (Utilities.IsDesertUnlocked() || Config.ShowItemsFromLockedPlaces || Utilities.IsMerchantAvailiableAndHasItem(Constants.BEET_SEEDS) )
             {
-                AddCrop(Constants.BEET);
+                ManuallyAddCrop(Constants.BEET);
             }
         }
 

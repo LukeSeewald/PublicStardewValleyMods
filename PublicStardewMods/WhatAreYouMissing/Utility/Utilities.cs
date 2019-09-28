@@ -75,17 +75,17 @@ namespace WhatAreYouMissing
             {
                 int totalDaysNeeded = GetTotalDaysToGrowNewSeed(seedIndex);
                 string[] growthSeasons = new string[data[seedIndex].Split('/')[1].Split(' ').Length];
-
+                growthSeasons = data[seedIndex].Split('/')[1].Split(' ');
                 if (IsGreenHouseUnlocked())
                 {
                     return true;
                 }
-                else if(Game1.Date.Season == growthSeasons[growthSeasons.Length - 1] && Game1.Date.DayOfMonth + totalDaysNeeded < 29)
+                else if(Game1.currentSeason == growthSeasons[growthSeasons.Length - 1] && Game1.dayOfMonth + totalDaysNeeded < 29)
                 {
                     //Its last growth season, make sure there is enough time
                     return true;
                 }
-                else if (growthSeasons.Contains(Game1.Date.Season))
+                else if (growthSeasons.Contains(Game1.currentSeason))
                 {
                     return true;
                 }

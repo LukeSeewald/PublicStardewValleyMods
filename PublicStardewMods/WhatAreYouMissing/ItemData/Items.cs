@@ -59,7 +59,7 @@ namespace WhatAreYouMissing
         /// season ends.
         /// </summary>
         /// <param name="key"></param>
-        protected void AddCrop(int key)
+        protected void ManuallyAddCrop(int key)
         {
             CropConversion cropConverter = new CropConversion();
             if (Utilities.IsThereEnoughTimeToGrowSeeds(cropConverter.CropToSeedIndex(key)))
@@ -210,6 +210,49 @@ namespace WhatAreYouMissing
             }
 
             return false;
+        }
+
+        protected void AddCrops(string season)
+        {
+            Dictionary<int, string> cropData = Game1.content.Load<Dictionary<int, string>>("Data\\Crops");
+            Constants constants = new Constants();
+            foreach(KeyValuePair<int, string> data in cropData)
+            {
+                string[] crop = data.Value.Split('/');
+                string[] seasons = crop[1].Split(' ');
+                //Don't add it if its common to all seasons
+                if(seasons.Length != 4)
+                {
+                    if (seasons.Contains(season) && Game1.currentSeason == season && !constants.SPECIAL_SEEDS.Contains(data.Key))
+                    {
+                        if (Utilities.IsThereEnoughTimeToGrowSeeds(data.Key))
+                        {
+                            AddOneCommonObject(int.Parse(crop[3]));
+                        }
+                    }
+                    else if (seasons.Contains(season) && Game1.currentSeason != season && !constants.SPECIAL_SEEDS.Contains(data.Key))
+                    {
+                        //AddCrop checks to see if you can grow it
+                        //this adds out of season items to their
+                        //season items which is used by the 
+                        //travelling merchant check
+                        AddOneCommonObject(int.Parse(crop[3]));
+                    }
+                }
+            }
+        }
+
+        protected void AddFruitTrees(string season)
+        {
+            Dictionary<int, string> fruitTreesData = Game1.content.Load<Dictionary<int, string>>("Data\\fruitTrees");
+            foreach (KeyValuePair<int, string> data in fruitTreesData)
+            {
+                string[] fruitTree = data.Value.Split('/');
+                if (fruitTree[1] == season)
+                {
+                    AddOneCommonObject(int.Parse(fruitTree[2]));
+                }
+            }
         }
     }
 }

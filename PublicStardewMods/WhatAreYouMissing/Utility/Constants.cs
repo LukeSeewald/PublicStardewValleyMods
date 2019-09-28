@@ -293,6 +293,11 @@ namespace WhatAreYouMissing
         public readonly ReadOnlyCollection<int> SPECIAL_MINE_FISH = new ReadOnlyCollection<int>(
                                                 new List<int> { STONEFISH, ICE_PIP, LAVA_EEL });
 
+        public readonly ReadOnlyCollection<int> SPECIAL_SEEDS = new ReadOnlyCollection<int>(
+                                                new List<int> { GARLIC_SEEDS, RHUBARB_SEEDS, STRAWBERRY_SEEDS,
+                                                                RED_CABBAGE_SEEDS, STARFRUIT_SEEDS, ARTICHOKE_SEEDS,
+                                                                BEET_SEEDS});
+
         public readonly ReadOnlyCollection<int> ITEMS_PLAYER_CAN_ONLY_HAVE_ONE_OF = new ReadOnlyCollection<int>(
                                                 new List<int> { GLACIERFISH, CRIMSONFISH, ANGLER, MUTANT_CARP });
 

@@ -21,25 +21,28 @@ namespace WhatAreYouMissing
         {
             AddCrops();
             AddForagables();
-            AddFruitTrees();
+            //AddFruitTrees();
+            AddFruitTrees("summer");
             AddFish();
         }
 
         private void AddCrops()
         {
-            AddCrop(Constants.MELON);
-            AddCrop(Constants.POPPY);
-            AddCrop(Constants.RADISH);
-            AddCrop(Constants.SUMMER_SPANGLE);
-            AddCrop(Constants.SUNFLOWER);
-            AddCrop(Constants.WHEAT);
-            AddCrop(Constants.BLUEBERRY);
-            AddCrop(Constants.CORN);
-            AddCrop(Constants.HOPS);
-            AddCrop(Constants.HOT_PEPPER);
-            AddCrop(Constants.TOMATO);
-            //coffee beans can only come from travelling cart or mines
-            AddCrop(Constants.COFFEE_BEAN);
+            //AddCrop(Constants.MELON);
+            //AddCrop(Constants.POPPY);
+            //AddCrop(Constants.RADISH);
+            //AddCrop(Constants.SUMMER_SPANGLE);
+            //AddCrop(Constants.SUNFLOWER);
+            //AddCrop(Constants.WHEAT);
+            //AddCrop(Constants.BLUEBERRY);
+            //AddCrop(Constants.CORN);
+            //AddCrop(Constants.HOPS);
+            //AddCrop(Constants.HOT_PEPPER);
+            //AddCrop(Constants.TOMATO);
+            ////coffee beans can only come from travelling cart or mines
+            //AddCrop(Constants.COFFEE_BEAN);
+
+            AddCrops("summer");
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.RED_CABBAGE))
             {
@@ -47,7 +50,7 @@ namespace WhatAreYouMissing
             }
             else if (Game1.Date.Year > 1 || Utilities.IsMerchantAvailiableAndHasItem(Constants.RED_CABBAGE_SEEDS))
             {
-                AddCrop(Constants.RED_CABBAGE);
+                ManuallyAddCrop(Constants.RED_CABBAGE);
             }
 
             if (Utilities.IsMerchantAvailiableAndHasItem(Constants.STARFRUIT))
@@ -56,7 +59,7 @@ namespace WhatAreYouMissing
             }
             else if (Utilities.IsDesertUnlocked() || Config.ShowItemsFromLockedPlaces || Utilities.IsMerchantAvailiableAndHasItem(Constants.STARFRUIT_SEEDS))
             {
-                AddCrop(Constants.STARFRUIT);
+                ManuallyAddCrop(Constants.STARFRUIT);
             }
         }
 
@@ -81,8 +84,8 @@ namespace WhatAreYouMissing
 
         private void AddFruitTrees()
         {
-            AddOneCommonObject(Constants.APPLE);
-            AddOneCommonObject(Constants.POMEGRANATE);
+            //AddOneCommonObject(Constants.APPLE);
+            //AddOneCommonObject(Constants.POMEGRANATE);
         }
 
         private void AddFish()
