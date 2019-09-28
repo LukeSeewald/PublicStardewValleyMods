@@ -159,7 +159,7 @@ namespace WhatAreYouMissing
             AddOneCommonObject(Constants.PEACH);
 
             AddOneCommonObject(Constants.POMEGRANATE);
-            AddOneCommonObject(Constants.CHEERY);
+            AddOneCommonObject(Constants.CHERRY);
         }
 
         private void AddCommonLakeFish()

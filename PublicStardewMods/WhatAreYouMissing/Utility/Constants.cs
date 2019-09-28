@@ -162,6 +162,13 @@ namespace WhatAreYouMissing
         public const int STRAWBERRY_SEEDS = 745;
         public const int CACTUS_SEEDS = 802;
 
+        public const int CHERRY_SAPLING = 628;
+        public const int APRICOT_SAPLING = 629;
+        public const int ORANGE_SAPLING = 630;
+        public const int PEACH_SAPLING = 631;
+        public const int POMEGRANATE_SAPLING = 632;
+        public const int APPLE_SAPLING = 633;
+
         //Other Items from the community center bundles
         public const int WOOD = 388;
         public const int STONE = 390;
@@ -188,7 +195,7 @@ namespace WhatAreYouMissing
         public const int ORANGE = 635;
         public const int PEACH = 636;
         public const int POMEGRANATE = 637;
-        public const int CHEERY = 638;
+        public const int CHERRY = 638;
         public const int LARGEMOUTH_BASS = 136;
         public const int CARP = 142;
         public const int BULLHEAD = 700;
