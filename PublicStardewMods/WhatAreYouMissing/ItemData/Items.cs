@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using StardewValley;
 using SObject = StardewValley.Object;
+using StardewModdingAPI;
+using System.Reflection;
+using System.Collections;
 
 namespace WhatAreYouMissing
 {
@@ -12,6 +15,7 @@ namespace WhatAreYouMissing
     {
         protected Dictionary<int, SObject> items;
         protected ModConfig Config;
+        private Dictionary<int, IList<string>> JsonAssetsObjects;
         public enum FarmTypes
         {
             Normal = 0,
@@ -27,6 +31,8 @@ namespace WhatAreYouMissing
         {
             Config = ModEntry.modConfig;
             items = new Dictionary<int, SObject>();
+            JsonAssetsObjects = new Dictionary<int, IList<string>>();
+            GetJsonAssetsInfo();
             AddItems();
         }
 
@@ -215,31 +221,69 @@ namespace WhatAreYouMissing
         protected void AddCrops(string season)
         {
             Dictionary<int, string> cropData = Game1.content.Load<Dictionary<int, string>>("Data\\Crops");
-            Constants constants = new Constants();
             foreach(KeyValuePair<int, string> data in cropData)
             {
-                string[] crop = data.Value.Split('/');
-                string[] seasons = crop[1].Split(' ');
-                //Don't add it if its common to all seasons
-                if(seasons.Length != 4)
+                if (IsFromJsonAssets(data.Key))
                 {
-                    if (seasons.Contains(season) && Game1.currentSeason == season && !constants.SPECIAL_SEEDS.Contains(data.Key))
+                    AddJsonAssetCrop(season, data);
+                }
+                else
+                {
+                    AddCrop(season, data);
+                }
+                
+            }
+        }
+
+        private void AddJsonAssetCrop(string season, KeyValuePair<int, string> data)
+        {
+            if (IsPurchasable(data.Key))
+            {
+                AddCrop(season, data);
+            }
+        }
+
+        private bool IsPurchasable(int id)
+        {
+            IList<string> requirements = JsonAssetsObjects[id];
+            foreach(string requirement in requirements)
+            {
+                //Only want to check year requirements, not season
+                //Assuming you can't buy JA stuff from travelling cart
+                string[] info = requirement.Split(' ');
+                if(info[0] == "y")
+                {
+                    return Game1.year >= int.Parse(info[1]);
+                }
+            }
+            return true;
+        }
+
+        private void AddCrop(string season, KeyValuePair<int, string> data)
+        {
+            Constants constants = new Constants();
+            string[] crop = data.Value.Split('/');
+            string[] seasons = crop[1].Split(' ');
+            //Don't add it if its common to all seasons
+            if (seasons.Length != 4 && seasons.Contains(season) && !constants.SPECIAL_SEEDS.Contains(data.Key))
+            {
+                if (Game1.currentSeason == season)
+                {
+                    if (Utilities.IsThereEnoughTimeToGrowSeeds(data.Key))
                     {
-                        if (Utilities.IsThereEnoughTimeToGrowSeeds(data.Key))
-                        {
-                            AddOneCommonObject(int.Parse(crop[3]));
-                        }
-                    }
-                    else if (seasons.Contains(season) && Game1.currentSeason != season && !constants.SPECIAL_SEEDS.Contains(data.Key))
-                    {
-                        //AddCrop checks to see if you can grow it
-                        //this adds out of season items to their
-                        //season items which is used by the 
-                        //travelling merchant check
                         AddOneCommonObject(int.Parse(crop[3]));
                     }
                 }
+                else
+                {
+                    AddOneCommonObject(int.Parse(crop[3]));
+                }
             }
+        }
+
+        private bool IsFromJsonAssets(int id)
+        {
+            return JsonAssetsObjects.ContainsKey(id);
         }
 
         protected void AddFruitTrees(string season)
@@ -247,12 +291,66 @@ namespace WhatAreYouMissing
             Dictionary<int, string> fruitTreesData = Game1.content.Load<Dictionary<int, string>>("Data\\fruitTrees");
             foreach (KeyValuePair<int, string> data in fruitTreesData)
             {
-                string[] fruitTree = data.Value.Split('/');
-                if (fruitTree[1] == season)
+                if (IsFromJsonAssets(data.Key))
                 {
-                    AddOneCommonObject(int.Parse(fruitTree[2]));
+                    AddJsonAssetFruitTree(season, data);
+                }
+                else
+                {
+                    AddFruitTree(season, data);
                 }
             }
+        }
+
+        private void AddJsonAssetFruitTree(string season, KeyValuePair<int, string> data)
+        {
+            if (IsPurchasable(data.Key))
+            {
+                AddFruitTree(season, data);
+            }
+        }
+
+        private void AddFruitTree(string season, KeyValuePair<int, string> data)
+        {
+            string[] fruitTree = data.Value.Split('/');
+            if (fruitTree[1] == season)
+            {
+                AddOneCommonObject(int.Parse(fruitTree[2]));
+            }
+        }
+
+        private void GetJsonAssetsInfo()
+        {
+            IModHelper helper = ModEntry.HelperInstance;
+            // get Json Assets
+            object mod = this.GetJsonAssets();
+            if (mod == null)
+                return;
+
+            // get objects
+            IEnumerable objects = helper.Reflection.GetField<IEnumerable>(mod, "objects").GetValue();
+            foreach (object obj in objects)
+            {
+                int id = helper.Reflection.GetField<int>(obj, "id").GetValue();
+                IList<string> requirements = helper.Reflection.GetProperty<IList<string>>(obj, "PurchaseRequirements").GetValue();
+                JsonAssetsObjects.Add(id, requirements);
+            }
+        }
+
+        private object GetJsonAssets()
+        {
+            IModHelper helper = ModEntry.HelperInstance;
+
+            // get mod info
+            IModInfo modInfo = helper.ModRegistry.Get("spacechase0.jsonAssets");
+            if (modInfo == null)
+                return null; // mod isn't installed
+
+            // get mod instance
+            var property = modInfo.GetType().GetProperty("Mod", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            if (property == null)
+                throw new InvalidOperationException($"Can't access 'Mod' field on type '{modInfo.GetType().FullName}'.");
+            return property.GetValue(modInfo);
         }
     }
 }

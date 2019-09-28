@@ -82,5 +82,7 @@
   "LOCATIONS": "Location(s)",
   "SEASONS": "Season(s)",
   "WEATHER": "Weather",
-  "TIME": "Time"
+  "TIME": "Time",
+
+  "AREA": "Area"
 }

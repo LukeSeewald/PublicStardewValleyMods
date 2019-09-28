@@ -19,6 +19,7 @@ namespace WhatAreYouMissing
         public static RecipeIngredients RecipesIngredients;
         public static Logger Logger;
         public static ITranslationHelper Translator;
+        public static IModHelper HelperInstance;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -28,7 +29,7 @@ namespace WhatAreYouMissing
             //aren't ready yet. If you need to run stuff when a save is ready use the save loaded event
             Translator = helper.Translation;
             helper.Events.Input.ButtonPressed += OnButtonPressed;
-
+            HelperInstance = Helper;
             modConfig = Helper.ReadConfig<ModConfig>();
             buttonToBringUpInterface = modConfig.button;
         }

@@ -31,7 +31,16 @@ namespace WhatAreYouMissing
             {
                 return new string[1] { "" };
             }
-            return new string[1] { gameName + " Area " + areaCode };
+
+            if(areaCode == -1)
+            {
+                //Its availble everywhere in this area
+                return new string[1] { gameName };
+            }
+            else
+            {
+                return new string[1] { gameName + " " + Utilities.GetTranslation("AREA") + " " + areaCode };
+            }
         }
 
         private void AddDisplayNames()
