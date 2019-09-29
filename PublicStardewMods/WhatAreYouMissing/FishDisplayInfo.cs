@@ -63,16 +63,6 @@ namespace WhatAreYouMissing
     }
     public class FishDisplayInfo
     {
-        //The index of the seasons in locationData
-        //When the data is split on'/'
-        private enum SeasonIndex
-        {
-            Spring = 4,
-            Summer = 5,
-            Fall = 6,
-            Winter = 7
-        };
-
         int ParentSheetIndex;
         Dictionary<int, string> FishData;
         Dictionary<string, string> LocationData;

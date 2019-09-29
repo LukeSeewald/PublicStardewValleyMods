@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SObject = StardewValley.Object;
+using StardewValley;
 
 namespace WhatAreYouMissing
 {
@@ -15,23 +16,66 @@ namespace WhatAreYouMissing
         {
             AddAllFish();
 
-            AddOneCommonObject(Constants.CRIMSONFISH);
-            AddOneCommonObject(Constants.ANGLER);
-            AddOneCommonObject(Constants.GLACIERFISH);
-            AddOneCommonObject(Constants.MUTANT_CARP);
 
-            AddOneCommonObject(Constants.MIDNIGHT_SQUID);
-            AddOneCommonObject(Constants.SPOOK_FISH);
-            AddOneCommonObject(Constants.BLOBFISH);
+            //add option to only show uncaught fish
+            AddFishBasedOnConfig(Constants.CRIMSONFISH);
+            AddFishBasedOnConfig(Constants.ANGLER);
+            AddFishBasedOnConfig(Constants.GLACIERFISH);
+            AddFishBasedOnConfig(Constants.MUTANT_CARP);
 
-            AddOneCommonObject(Constants.STONEFISH);
-            AddOneCommonObject(Constants.ICE_PIP);
-            AddOneCommonObject(Constants.LAVA_EEL);
+            AddFishBasedOnConfig(Constants.MIDNIGHT_SQUID);
+            AddFishBasedOnConfig(Constants.SPOOK_FISH);
+            AddFishBasedOnConfig(Constants.BLOBFISH);
+
+            AddFishBasedOnConfig(Constants.STONEFISH);
+            AddFishBasedOnConfig(Constants.ICE_PIP);
+            AddFishBasedOnConfig(Constants.LAVA_EEL);
         }
 
         public Dictionary<int, SObject> GetItems()
         {
             return items;
+        }
+
+        private void AddAllFish()
+        {
+            Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
+
+            foreach (KeyValuePair<string, string> data in LocationData)
+            {
+                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
+                {
+                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
+                    for (int i = 0; i < seasonalFish.Length; ++i)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            //Its a parent sheet index
+                            int parentSheetIndex = int.Parse(seasonalFish[i]);
+
+                            //I want to add them manually, -1 means no fish at this location
+                            if (IsAFish(parentSheetIndex))
+                            {
+                                AddFishBasedOnConfig(parentSheetIndex);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddFishBasedOnConfig(int id)
+        {
+            if (!Config.DoNotShowCaughtFish)
+            {
+                //Add the fish regardless of if its been caught or not
+                AddOneCommonObject(id);
+            }
+            else if (!IsFishAlreadyCaught(id))
+            {
+                //only add it if it hasn't been caught yet
+                AddOneCommonObject(id);
+            }
         }
     }
 }

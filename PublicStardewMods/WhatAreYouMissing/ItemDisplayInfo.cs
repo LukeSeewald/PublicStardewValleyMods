@@ -161,12 +161,17 @@ namespace WhatAreYouMissing
 
             for (int i = 0; i < buffs.Length; ++i)
             {
-                if (buffs[i] != "0")
+                if (buffs[i] != "0" && !IsUnImplementedBuff(i))
                 {
                     nameOfBuffs.Add(GetBuffNameFromIndex(i), buffs[i]);
                 }
             }
             return nameOfBuffs;
+        }
+
+        private bool IsUnImplementedBuff(int index)
+        {
+            return index == 3 || index == 6;
         }
 
         private string GetBuffNameFromIndex(int index)

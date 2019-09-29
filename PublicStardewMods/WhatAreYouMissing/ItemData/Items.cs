@@ -86,15 +86,6 @@ namespace WhatAreYouMissing
                 items.Add(parentSheetIndex, new SObject(parentSheetIndex, stackSize));
             }
         }
-
-        private enum SeasonIndex
-        {
-            Spring = 4,
-            Summer = 5,
-            Fall = 6,
-            Winter = 7
-        };
-
         private int SeasonNameToIndex(string season)
         {
             switch (season)
@@ -132,7 +123,16 @@ namespace WhatAreYouMissing
                             //I want to add them manually, -1 means no fish at this location
                             if (IsNormalFish(parentSheetIndex) && NotInAllSeasons(parentSheetIndex))
                             {
-                                AddFish(parentSheetIndex);
+                                if (!Config.DoNotShowCaughtFish)
+                                {
+                                    //Add the fish regardless of if its been caught or not
+                                    AddFish(parentSheetIndex);
+                                }
+                                else if(!IsFishAlreadyCaught(parentSheetIndex))
+                                {
+                                    //only add it if it hasn't been caught yet
+                                    AddFish(parentSheetIndex);
+                                }
                             }
                         }
                     }
@@ -140,31 +140,9 @@ namespace WhatAreYouMissing
             }
         }
 
-        protected void AddAllFish()
+        protected bool IsFishAlreadyCaught(int id)
         {
-            Dictionary<string, string> LocationData = Game1.content.Load<Dictionary<string, string>>("Data\\Locations");
-
-            foreach (KeyValuePair<string, string> data in LocationData)
-            {
-                for (int season = (int)SeasonIndex.Spring; !Utilities.IsTempOrFishingGameOrBackwoodsLocation(data.Key) && season < (int)SeasonIndex.Winter + 1; ++season)
-                {
-                    string[] seasonalFish = data.Value.Split('/')[season].Split(' ');
-                    for (int i = 0; i < seasonalFish.Length; ++i)
-                    {
-                        if (i % 2 == 0)
-                        {
-                            //Its a parent sheet index
-                            int parentSheetIndex = int.Parse(seasonalFish[i]);
-
-                            //I want to add them manually, -1 means no fish at this location
-                            if (IsAFish(parentSheetIndex))
-                            {
-                                AddOneCommonObject(parentSheetIndex);
-                            }
-                        }
-                    }
-                }
-            }
+            return Game1.player.fishCaught.ContainsKey(id);
         }
 
         private bool IsNormalFish(int parentSheetIndex)
@@ -174,7 +152,7 @@ namespace WhatAreYouMissing
             return !constants.LEGENDARY_FISH.Contains(parentSheetIndex) && isAFish;
         }
 
-        private bool IsAFish(int parentSheetIndex)
+        protected bool IsAFish(int parentSheetIndex)
         {
             //Sometimes a mod can put the info into location data but not edit fish data
             //or object info so the mod it is meant to support doesn't exist
@@ -216,27 +194,6 @@ namespace WhatAreYouMissing
             }
 
             return false;
-        }
-
-        protected void AddAllCropsAndSaplings()
-        {
-            Dictionary<int, string> cropData = Game1.content.Load<Dictionary<int, string>>("Data\\Crops");
-            Constants constants = new Constants();
-            foreach (KeyValuePair<int, string> data in cropData)
-            {
-                if (!constants.RANDOM_SEASON_SEEDS.Contains(data.Key))
-                {
-                    string[] crop = data.Value.Split('/');
-                    AddOneCommonObject(int.Parse(crop[3]));
-                }
-            }
-
-            Dictionary<int, string> fruitTreesData = Game1.content.Load<Dictionary<int, string>>("Data\\fruitTrees");
-            foreach (KeyValuePair<int, string> data in fruitTreesData)
-            {
-                string[] fruitTree = data.Value.Split('/');
-                AddOneCommonObject(int.Parse(fruitTree[2]));
-            }
         }
 
         protected void AddCrops(string season)

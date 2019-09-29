@@ -12,6 +12,16 @@ using StardewValley.Menus;
 
 namespace WhatAreYouMissing
 {
+    //The index of the seasons in locationData
+    //When the data is split on'/'
+    public enum SeasonIndex
+    {
+        Spring = 4,
+        Summer = 5,
+        Fall = 6,
+        Winter = 7
+    };
+
     public class Utilities
     {
         public static bool IsDesertUnlocked()
