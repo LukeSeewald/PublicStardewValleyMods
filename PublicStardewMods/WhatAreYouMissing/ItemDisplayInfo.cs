@@ -157,7 +157,16 @@ namespace WhatAreYouMissing
         private Dictionary<string, string> GetBuffs()
         {
             Dictionary<string, string> nameOfBuffs = new Dictionary<string, string>();
-            string[] buffs = Game1.objectInformation[ParentSheetIndex].Split('/')[SObject.objectInfoBuffTypesIndex].Split(' ');
+            string[] buffs = null;
+            try
+            {
+                buffs = Game1.objectInformation[ParentSheetIndex].Split('/')[SObject.objectInfoBuffTypesIndex].Split(' ');
+            }
+            catch
+            {
+                ModEntry.Logger.LogRecipeBuffError(Game1.objectInformation[ParentSheetIndex]);
+                return nameOfBuffs;
+            }
 
             for (int i = 0; i < buffs.Length; ++i)
             {

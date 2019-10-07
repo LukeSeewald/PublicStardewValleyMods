@@ -51,7 +51,12 @@ namespace WhatAreYouMissing
                         if (i % 2 == 0)
                         {
                             //Its a parent sheet index
-                            int parentSheetIndex = int.Parse(seasonalFish[i]);
+                            bool successful = int.TryParse(seasonalFish[i], out int parentSheetIndex);
+                            if (!successful)
+                            {
+                                ModEntry.Logger.LogFishIndexError(data.Value.Split('/')[season], seasonalFish[i], i);
+                                continue;
+                            }
 
                             //I want to add them manually, -1 means no fish at this location
                             if (IsAFish(parentSheetIndex))
