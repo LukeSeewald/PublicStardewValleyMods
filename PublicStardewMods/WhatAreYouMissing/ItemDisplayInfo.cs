@@ -154,6 +154,12 @@ namespace WhatAreYouMissing
         {
             Dictionary<string, string> nameOfBuffs = new Dictionary<string, string>();
             string[] buffs = null;
+
+            // objects without buffs may not have the final two objectInformation fields
+            if (Game1.objectInformation[ParentSheetIndex].Split('/').Length <= SObject.objectInfoBuffTypesIndex) {
+                return nameOfBuffs;
+            }
+
             try
             {
                 buffs = Game1.objectInformation[ParentSheetIndex].Split('/')[SObject.objectInfoBuffTypesIndex].Split(' ');
