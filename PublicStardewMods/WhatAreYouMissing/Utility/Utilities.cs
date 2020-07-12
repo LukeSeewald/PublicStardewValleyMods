@@ -109,6 +109,10 @@ namespace WhatAreYouMissing
                 totalDays += numDays;
             }
 
+            if(seedIndex == Constants.RICE_SHOOT)
+            {
+                totalDays = (int)(totalDays * 0.75);
+            }
             return totalDays;
         }
 
