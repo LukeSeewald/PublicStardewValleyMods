@@ -87,10 +87,10 @@ namespace WhatAreYouMissing
                 {
                     return true;
                 }
-                else if(Game1.currentSeason == growthSeasons[growthSeasons.Length - 1] && Game1.dayOfMonth + totalDaysNeeded < 29)
+                else if(Game1.currentSeason == growthSeasons[growthSeasons.Length - 1])
                 {
                     //Its last growth season, make sure there is enough time
-                    return true;
+                    return Game1.dayOfMonth + totalDaysNeeded < 29;
                 }
                 else if (growthSeasons.Contains(Game1.currentSeason))
                 {
