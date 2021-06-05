@@ -250,6 +250,8 @@ namespace WhatAreYouMissing
 
         public const int CINDERSAP_POND_AREA_CODE = 1;
         public const int CINDERSAP_RIVER_AREA_CODE = 0;
+        public const int GINGER_ILSAND_WEST_OCEAN_CODE = 1;
+        public const int GINGER_ISLAND_WEST_FRESHWATER_CODE = 2;
         public const int DEFAULT_AREA_CODE = -1;
 
         public const int SPRITE_SIZE = 64;
@@ -266,6 +268,13 @@ namespace WhatAreYouMissing
         public const string GAME_NAME_SEWER = "Sewer";
         public const string GAME_NAME_MUTANT_BUG_LAIR = "BugLand";
         public const string GAME_NAME_WITCHS_SWAMP = "WitchSwamp";
+        public const string GAME_NAME_GINGER_ISLAND_N = "IslandNorth";
+        public const string GAME_NAME_GINGER_ISLAND_S = "IslandSouth";
+        public const string GAME_NAME_GINGER_ISLAND_W = "IslandWest";
+        public const string GAME_NAME_GINGER_ISLAND_SE = "IslandSouthEast";
+        public const string GAME_NAME_GINGER_ISLAND_SE_CAVE = "IslandSouthEastCave";
+        public const string GAME_NAME_GINGER_ISLAND_SECRET = "IslandSecret";
+        public const string GAME_NAME_GINGER_ISLAND_N_CAVE = "IslandNorthCave1";
 
         public const int MUTANT_CARP = 682;
 

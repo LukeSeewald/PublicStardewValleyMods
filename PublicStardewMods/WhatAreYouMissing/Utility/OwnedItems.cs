@@ -162,15 +162,15 @@ namespace WhatAreYouMissing
                 {
                     //this should add everything that is a chest
                     //it might not add if something is like done in the furnace/keg/preserve jar
-
                     if (obj is Chest chest)
                     {
                         if (chest.playerChest.Value)
                         {
                             ownedItems.Add(chest);
-                            ownedItems.AddRange(chest.items);
+                            ownedItems.AddRange(chest.GetItemsForPlayer(Game1.player.uniqueMultiplayerID));
                         }
                     }
+
                     //auto grabber
                     else if (obj.ParentSheetIndex == 165 && obj.heldObject.Value is Chest grabberChest)
                     {
