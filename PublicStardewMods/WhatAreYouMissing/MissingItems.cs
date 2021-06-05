@@ -1,5 +1,6 @@
 ﻿using StardewValley;
 using StardewValley.Locations;
+using StardewModdingAPI;
 using System;
 using System.Collections.Generic;
 using SObject = StardewValley.Object;
@@ -46,11 +47,11 @@ namespace WhatAreYouMissing
         private List<SObject> MissingFish;
         private List<SObject> MissingCrops;
 
-        public MissingItems()
+        public MissingItems(IReflectionHelper reflection)
         {
             InitializeItemDictionaries();
             InitializeMissingLists();
-            InitializePlayerItems();
+            InitializePlayerItems(reflection);
 
             FindMissingItems();
         }
@@ -85,9 +86,9 @@ namespace WhatAreYouMissing
             MissingCrops = new List<SObject>();
         }
 
-        private void InitializePlayerItems()
+        private void InitializePlayerItems(IReflectionHelper reflection)
         {
-            OwnedItems = new OwnedItems();
+            OwnedItems = new OwnedItems(reflection);
             CondensedPlayerItems = OwnedItems.GetPlayerItems();
         }
 
