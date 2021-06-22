@@ -76,6 +76,11 @@ namespace WhatAreYouMissing
             return Game1.player.hasDarkTalisman;
         }
 
+        public static bool IsExtendedFamilyQuestActive()
+        {
+            return Game1.player.team.SpecialOrderActive("QiChallenge8");
+        }
+
         public static bool CheckMerchantForItemAndSeed(int item)
         {
             CropConversion cropConverter = new CropConversion();
