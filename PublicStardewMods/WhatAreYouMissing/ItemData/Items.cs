@@ -311,7 +311,7 @@ namespace WhatAreYouMissing
             IEnumerable objects = helper.Reflection.GetField<IEnumerable>(mod, "Objects").GetValue();
             foreach (object obj in objects)
             {
-                int id = helper.Reflection.GetField<int>(obj, "Id").GetValue();
+                int id = helper.Reflection.GetProperty<int>(obj, "Id").GetValue();
                 IList<string> requirements = helper.Reflection.GetProperty<IList<string>>(obj, "PurchaseRequirements").GetValue();
                 JsonAssetsObjects.Add(id, requirements != null ? requirements : new List<string>());
             }
