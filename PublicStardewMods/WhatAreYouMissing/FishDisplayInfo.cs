@@ -1,6 +1,8 @@
 ﻿using StardewValley;
+using StardewValley.BellsAndWhistles;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WhatAreYouMissing
 {
@@ -116,7 +118,25 @@ namespace WhatAreYouMissing
             {
                 FishInfo info = FishInfoList[i];
 
-                displayInfo += Utilities.GetTranslation("LOCATIONS") + ": " + string.Join(", ", info.GetLocations()) + "\n";
+                List<string> locations = info.GetLocations();
+                
+                displayInfo += Utilities.GetTranslation("LOCATIONS") + ": ";
+                for (int j = 0; j < locations.Count; j++)
+                {
+                    string location = locations[j];
+                    if (j == locations.Count - 1)
+                    {
+                        displayInfo += location + "\n";
+                    } else
+                    {
+                        if (Game1.smallFont.MeasureString(displayInfo + location + ", ").X > Game1.uiViewport.Width)
+                        {
+                            displayInfo += "\n";
+                        }
+                        displayInfo += location + ", ";
+                    }
+                }
+
                 displayInfo += Utilities.GetTranslation("SEASONS") + ": " + string.Join(", ", info.GetSeasons()) + "\n";
                 displayInfo += Utilities.GetTranslation("WEATHER") + ": " + info.GetWeather() + "\n";
                 displayInfo += Utilities.GetTranslation("TIME") + ": " + info.GetTimes();
