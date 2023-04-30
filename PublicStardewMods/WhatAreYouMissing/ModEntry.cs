@@ -1,10 +1,13 @@
-﻿using StardewModdingAPI;
+﻿using System;
+using Microsoft.Xna.Framework;
+using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewModdingAPI.Utilities;
 using StardewValley;
 
 namespace WhatAreYouMissing
 {
-    public class ModEntry : Mod
+    internal sealed class ModEntry : Mod
     {
         private SButton ButtonToBringUpInterface;
         private IReflectionHelper Reflection;
