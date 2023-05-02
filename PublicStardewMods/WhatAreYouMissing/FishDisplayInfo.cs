@@ -126,6 +126,10 @@ namespace WhatAreYouMissing
                     string location = locations[j];
                     if (j == locations.Count - 1)
                     {
+                        if (Game1.smallFont.MeasureString(displayInfo + location).X > Game1.uiViewport.Width)
+                        {
+                            displayInfo += "\n";
+                        }
                         displayInfo += location + "\n";
                     } else
                     {
